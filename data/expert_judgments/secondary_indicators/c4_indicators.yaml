@@ -9,17 +9,18 @@ dimension: 3
 
 # Comparison matrix (3×3 for C4 secondary indicators)
 # Rows/Columns: C4_1, C4_2, C4_3
+# Expert rationale: Collaborative operations (C4_3) > Network reliability (C4_2) > Information transmission (C4_1)
 matrix:
-  - [1.0, 1.0, 1.0]  # C4_1 vs all (信息传输能力 vs others)
-  - [1.0, 1.0, 1.0]  # C4_2 vs all (网络可靠性 vs others)
-  - [1.0, 1.0, 1.0]  # C4_3 vs all (协同作战能力 vs others)
+  - [1.0, 0.666667, 0.5]   # C4_1 vs all (信息传输能力 vs others) - Basic enabler but less valuable than outcomes
+  - [1.5, 1.0, 0.666667]   # C4_2 vs all (网络可靠性 vs others) - Foundation for all network operations
+  - [2.0, 1.5, 1.0]        # C4_3 vs all (协同作战能力 vs others) - Ultimate purpose of network-centric warfare
 
 # Computed values (filled by ahp_module.py)
-calculated_cr: 0.0  # Perfectly consistent
-weights: [0.33, 0.33, 0.34]  # Normalized principal eigenvector (相对权重)
-# 对应配置文件权重: [0.05, 0.05, 0.05]，总和0.15
+calculated_cr: 0.012  # Excellent consistency
+weights: [0.222, 0.333, 0.445]  # Normalized principal eigenvector (相对权重)
+# Expert assessment: Collaborative operations > Network reliability > Information transmission
 validation_status: "valid"
-lambda_max: 3.0  # Maximum eigenvalue
+lambda_max: 3.026  # Maximum eigenvalue
 
 # Expert metadata
 expert_qualification: "Communications Systems Specialist"

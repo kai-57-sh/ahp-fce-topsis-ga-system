@@ -1,0 +1,261 @@
+# 北极海域制空权争夺作战场景
+# Arctic Domain Superiority Scenario
+
+scenario_id: "arctic_domain_superiority"
+scenario_name: "北极海域制空权争夺作战"
+scenario_type: "domain_control_superiority"
+description: "在极端北极环境下实施海域控制，建立战略优势，保障资源开发和航行安全"
+
+# 作战环境设定
+operational_environment:
+  geography:
+    area_type: "北极海域"
+    ice_coverage_percentage: "60-90%"
+    water_depth: "100-3000米"
+    operating_season: "夏季（7-9月）有限通航期"
+    strategic_points: "西北航道关键节点、北极资源区"
+
+  extreme_conditions: "极端寒冷环境"
+  mission_duration_hours: 120
+  daylight_variation: "极昼/极夜现象"
+  magnetic_field_variation: "极地磁异常"
+
+  # 极地环境因子量化
+  environmental_factors:
+    arctic_ice_conditions:
+      ice_thickness_meters: [1.5, 8.0]      # 冰层厚度
+      ice_concentration: 0.85               # 冰密集度
+      ice_movement_speed_knots: [0.5, 2.0]  # 冰层移动速度
+      icebreaker_requirement: true          # 需要破冰能力
+
+    extreme_weather:
+      air_temperature_celsius: [-40.0, -5.0]  # 气温范围
+      wind_chill_factor: 1.8                  # 风寒系数
+      visibility_conditions: "极差（暴风雪）"
+      atmospheric_pressure_variation: 0.20     # 大气压变化
+
+    electromagnetic_environment:
+      aurora_borealis_effect: 0.70            # 极光效应
+      polar_ionization_impact: 0.60           # 极地电离影响
+      gps_availability_reduction: 0.45       # GPS可用性下降
+    radar_performance_degradation: 0.35      # 雷达性能下降
+
+    acoustic_conditions:
+      underwater_sound_profile: "复杂冰下声场"
+      ice_noise_level_db: 85.0               # 冰下噪声等级
+      sonar_performance_modifier: -0.40      # 声呐性能修正
+      acoustic_stealth_advantage: 0.50        # 声学隐身优势
+
+    human_factors:
+      cold_stress_index: "极高"
+      equipment_reliability_degradation: 0.25 # 设备可靠性下降
+      personnel_effectiveness_reduction: 0.30 # 人员效能下降
+      maintenance_difficulty_multiplier: 2.0 # 维护难度倍数
+
+# 威胁设定
+threat_environment:
+  primary_threats:
+    - type: "北极战略潜艇"
+      quantity: "2-4艘核动力潜艇"
+      capability: "北极巡航导弹、战略威慑"
+      threat_level_coefficient: 0.90     # 极高威胁等级
+      ice_breaking_capability: true       # 破冰能力
+      arctic_stealth_coefficient: 0.85    # 北极隐身系数
+      cruise_missile_range_km: 2500.0     # 巡航导弹射程
+
+    - type: "极地攻击机群"
+      quantity: "8-16架多功能战斗机"
+      capability: "北极空中优势、远程打击"
+      threat_level_coefficient: 0.75     # 高威胁等级
+      arctic_base_capability: true        # 极地基地能力
+      cold_weather_operational_rating: 0.80 # 寒冷天气作战评级
+      stealth_penetration_capability: 0.60 # 隐身突防能力
+
+    - type: "冰下无人系统"
+      quantity: "10-20部 autonomous UUV"
+      capability: "冰下侦察、水雷部署"
+      threat_level_coefficient: 0.60     # 中等威胁等级
+      under_ice_navigation_capability: true # 冰下导航能力
+      autonomous_operation_duration_hours: 168 # 自主作战时长
+      swarm_coordination_under_ice: 0.40   # 冰下群体协同
+
+    - type: "极地特种作战部队"
+      quantity: "50-100人"
+      capability: "冰上特种作战、设施破坏"
+      threat_level_coefficient: 0.55     # 中等威胁等级
+      arctic_survival_expertise: 0.90     # 北极生存专长
+      stealth_movement_capability: 0.75   # 隐秘移动能力
+      cold_weather_equipment_quality: 0.85 # 寒冷天气装备质量
+
+  threat_coordination: "极高（极地联合作战）"
+  attack_timing: "极昼期或暴风雪期间"
+  seasonal_threat_variation: 0.40  # 季节性威胁变化
+
+  # 威胁量化指标
+  threat_metrics:
+    overall_threat_index: 0.82           # 综合威胁指数
+    arctic_advantage_factor: 0.70        # 北极优势因子
+    stealth_detection_difficulty: 0.85   # 隐身探测难度
+    multi_domain_attack_capability: 0.75 # 多域攻击能力
+    strategic_impact_level: 0.90         # 战略影响等级
+
+# 任务目标
+mission_objectives:
+  primary:
+    - objective: "北极海域控制"
+      weight: 0.35
+      description: "建立对关键北极海域的有效控制"
+      success_criteria: "控制海域≥70%，部署响应时间≤30分钟"
+
+    - objective: "冰下监视网络"
+      weight: 0.25
+      description: "构建冰下监视和预警网络"
+      success_criteria: "覆盖率≥80%，目标识别率≥75%"
+
+    - objective: "战略威慑展示"
+      weight: 0.25
+      description: "展示北极地区战略存在和威慑能力"
+      success_criteria: "存在展示频次≥每日2次，威慑效果指数≥0.8"
+
+    - objective: "资源安全保障"
+      weight: 0.15
+      description: "保障北极资源开发和航道安全"
+      success_criteria: "护航成功率≥95%，应急响应时间≤1小时"
+
+# 作战约束
+operational_constraints:
+  extreme_environment_constraints:
+    temperature_operating_limit: -45.0  # 最低操作温度
+    ice_class_requirement: "Polar Class 6+"
+    equipment_arctic_certification: true # 设备北极认证要求
+    cold_start_preparation_time_hours: 4.0 # 冷启动准备时间
+
+  rules_of_engagement:
+    engagement_authority: "防御性威慑"
+    proportionate_response_requirement: true # 比例响应要求
+    environmental_protection_mandate: "最高级" # 环境保护要求
+
+  logistical_constraints:
+    supply_line_distance_km: 3000.0      # 补给线距离
+    resupply_frequency_days: 30.0        # 补给频率
+    fuel_consumption_multiplier: 1.8     # 燃料消耗倍增
+    maintenance_window_hours: [4.0, 8.0] # 维护时间窗口
+
+# 遗传算法参数
+ga_parameters:
+  population_size: 40
+  num_generations: 100
+  num_parents_mating: 8
+  crossover_rate: 0.75
+  mutation_rate: 0.20
+  parent_selection_type: "tournament"
+  crossover_type: "uniform"
+  mutation_type: "adaptive"
+  keep_parents: 3
+  stop_criteria: "reach_target_fitness or generations"
+
+# 适应度函数权重
+objective_weights:
+  domain_control_effectiveness: 0.35    # 制域控制效能
+  ice_underwater_surveillance: 0.25    # 冰下监视能力
+  strategic_demonstration_impact: 0.25 # 战略展示影响
+  resource_security_assurance: 0.15     # 资源安全保障
+
+# 动态权重调整
+scenario_weight_adjustments:
+  adjustment_rationale: "基于北极极端环境特点，强化体系生存能力、态势感知和持续作战能力"
+
+  primary_capability_adjustments:
+    C1:  # 态势感知能力
+      base_weight: 0.25
+      scenario_multiplier: 1.50    # 极地环境态势感知困难
+      final_weight: 0.30
+      justification: "北极环境恶劣，态势感知能力至关重要"
+
+    C2:  # 指挥决策能力
+      base_weight: 0.20
+      scenario_multiplier: 1.20    # 复杂极地指挥决策
+      final_weight: 0.21
+      justification: "极地环境指挥决策挑战性大"
+
+    C3:  # 行动打击能力
+      base_weight: 0.25
+      scenario_multiplier: 1.10    # 极地打击条件限制
+      final_weight: 0.23
+      justification: "极地环境限制了打击能力发挥"
+
+    C4:  # 网络通联能力
+      base_weight: 0.15
+      scenario_multiplier: 1.40    # 极地通信困难
+      final_weight: 0.18
+      justification: "极地电磁环境复杂，通信能力要求高"
+
+    C5:  # 体系生存能力
+      base_weight: 0.15
+      scenario_multiplier: 1.80    # 极端环境生存关键
+      final_weight: 0.08
+      justification: "极端北极环境对体系生存能力要求极高"
+
+  secondary_indicator_priorities:
+    # C1 - 态势感知能力
+    C1_1:  # 侦察探测能力
+      weight_boost: 1.60
+      reasoning: "极地环境探测难度极大，需要强化探测能力"
+
+    C1_2:  # 信息融合能力
+      weight_boost: 1.50
+      reasoning: "多源极地信息融合对准确态势理解关键"
+
+    # C5 - 体系生存能力
+    C5_3:  # 持续作战能力
+      weight_boost: 2.00
+      reasoning: "极地环境后勤困难，持续作战能力至关重要"
+
+    C5_1:  # 抗毁能力
+      weight_boost: 1.80
+      reasoning: "极地恶劣环境要求强大的抗毁能力"
+
+    # C4 - 网络通联能力
+    C4_2:  # 网络可靠性
+      weight_boost: 1.60
+      reasoning: "极地通信环境恶劣，网络可靠性至关重要"
+
+    # C2 - 指挥决策能力
+    C2_3:  # 决策响应能力
+      weight_boost: 1.40
+      reasoning: "极地环境需要快速准确的决策响应"
+
+# 评估指标侧重
+evaluation_focus:
+  primary_indicators:
+    - "C1_1"  # 侦察探测能力
+    - "C5_3"  # 持续作战能力
+    - "C4_2"  # 网络可靠性
+    - "C2_1"  # 任务规划能力
+    - "C5_1"  # 抗毁能力
+
+  secondary_indicators:
+    - "C1_2"  # 信息融合能力
+    - "C3_2"  # 机动占位能力
+    - "C2_3"  # 决策响应能力
+    - "C4_3"  # 协同作战能力
+
+# 终止条件
+termination_criteria:
+  target_fitness: 0.85       # 目标适应度
+  max_generations: 100
+  convergence_generations: 20  # 连续20代无改进则停止
+  min_diversity: 0.10         # 最小种群多样性
+
+# 场景特殊要求
+scenario_specific_requirements:
+  arctic_equipment_certification: true  # 北极装备认证
+  extreme_cold_weather_operations: true # 极寒天气作战
+  ice_navigation_capability: true       # 冰层航行能力
+  polar_communication_systems: true     # 极地通信系统
+  environmental_compliance: "最高级"     # 环境合规要求
+
+created_by: "arctic_warfare_specialist"
+creation_date: "2025-12-04"
+version: "2.0"
+classification: "top_secret"

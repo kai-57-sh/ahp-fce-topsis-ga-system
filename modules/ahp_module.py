@@ -47,10 +47,22 @@ def calculate_weights(judgment_matrix: np.ndarray,
         JudgmentMatrixError: If matrix is invalid
         AHPConsistencyError: If CR >= threshold and validate_consistency=True
     """
-    # Validate matrix structure
+    # Add robust input validation
+    if judgment_matrix.size == 0:
+        raise JudgmentMatrixError("Empty matrix provided")
+
+    if not np.isfinite(judgment_matrix).all():
+        raise JudgmentMatrixError("Matrix contains invalid numerical values (inf or nan)")
+
+    # Validate matrix structure - always perform basic validation
     validation = validate_judgment_matrix(judgment_matrix)
     if not validation['is_valid']:
-        raise JudgmentMatrixError(f"Invalid judgment matrix: {validation['error_messages']}")
+        # Only raise errors for critical structural issues, not reciprocal property when validation is disabled
+        if not validate_consistency and "reciprocal" in str(validation['error_messages']):
+            # Allow reciprocal property violations when validation is disabled
+            pass
+        else:
+            raise JudgmentMatrixError(f"Invalid judgment matrix: {validation['error_messages']}")
 
     n = judgment_matrix.shape[0]
 
@@ -190,7 +202,7 @@ def load_judgment_matrix(file_path: str) -> Dict[str, Any]:
             data = yaml.safe_load(f)
 
         # Validate required fields
-        required_fields = ['matrix_id', 'matrix', 'dimension']
+        required_fields = ['matrix_id', 'matrix']
         for field in required_fields:
             if field not in data:
                 raise JudgmentMatrixError(f"Missing required field: {field}")
@@ -199,9 +211,13 @@ def load_judgment_matrix(file_path: str) -> Dict[str, Any]:
         matrix = np.array(data['matrix'], dtype=float)
 
         # Validate matrix dimensions
-        expected_dim = data['dimension']
+        expected_dim = data.get('dimension', matrix.shape[0])  # Use matrix size if dimension not provided
         if matrix.shape != (expected_dim, expected_dim):
-            raise JudgmentMatrixError(f"Matrix dimension mismatch: expected {expected_dim}x{expected_dim}, got {matrix.shape}")
+            # Only raise error if dimension is explicitly provided and doesn't match
+            if 'dimension' in data:
+                raise JudgmentMatrixError(f"Matrix dimension mismatch: expected {expected_dim}x{expected_dim}, got {matrix.shape}")
+            else:
+                raise JudgmentMatrixError(f"Matrix must be square: got {matrix.shape}")
 
         return data
 

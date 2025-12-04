@@ -22,36 +22,90 @@ operational_environment:
   weather_conditions: "多变（海峡特殊气象）"
   tidal_conditions: "强潮流（影响作战部署）"
 
+  # 环境因子量化
+  environmental_factors:
+    strait_hydrography:
+      tidal_current_speed_knots: [2.5, 5.0]   # 潮流速度
+      water_density_variation: 0.15            # 水密度变化
+      acoustic_transmission_loss: 0.20          # 声传播损失
+      sonar_detection_range_modifier: -0.25     # 声呐探测距离修正
+
+    meteorological_conditions:
+      wind_speed_knots: [15.0, 35.0]           # 风速范围
+      wave_height_meters: [2.0, 6.0]           # 波高范围
+      visibility_nautical_miles: [3.0, 10.0]   # 能见度
+      atmospheric_ducting_factor: 0.30         # 大气波导因子
+
+    electromagnetic_environment:
+      radar_horizon_limitation_km: 25.0        # 雷达视距限制
+      frequency_spectrum_congestion: 0.40      # 频谱拥堵度
+      multipath_interference_factor: 0.35      # 多径干扰因子
+      gps_accuracy_degradation: 0.20          # GPS精度下降
+
+    strategic_geography:
+      choke_point_effectiveness: 0.85          # 瓶颈点有效性
+      natural_bottleneck_utilization: 0.80     # 自然瓶颈利用率
+      island_defense_advantage: 0.60          # 岛屿防御优势
+      coastal_artillery_range_km: 25.0        # 岸炮射程
+
 # 威胁设定
 threat_environment:
   primary_threats:
     - type: "敌方水面战斗群"
       quantity: "2-3艘护卫舰/驱逐舰"
       capability: "反舰、防空、反潜作战能力"
-      threat_level: "高"
+      threat_level_coefficient: 0.85  # 高威胁等级
+      anti_ship_missile_range_km: 120.0  # 反舰导弹射程
+      point_defense_capability: 0.75      # 点防御能力
+      electronic_attack_power: 40.0       # 电子攻击功率
 
     - type: "敌方潜艇"
       quantity: "3-6艘"
       capability: "攻击型潜艇，具备对陆攻击能力"
       operating_depth: "50-300米"
+      threat_level_coefficient: 0.80    # 高威胁等级
+      stealth_coefficient: 0.70         # 隐身系数
+      torpedo_engagement_range_km: 25.0  # 鱼雷交战距离
+      cruise_missile_capability: true    # 巡航导弹能力
 
     - type: "导弹攻击艇"
       quantity: "4-8艘"
       capability: "反舰导弹，高速突击"
       attack_pattern: "狼群战术"
+      threat_level_coefficient: 0.70    # 中高威胁等级
+      maximum_speed_knots: 45.0         # 最大航速
+      swarm_coordination_level: 0.60    # 群体协同水平
+      saturation_attack_capability: 0.65 # 饱和攻击能力
 
     - type: "航空威胁"
       quantity: "6-12架"
       capability: "反舰攻击、电子干扰"
       basing: "陆基航空兵"
+      threat_level_coefficient: 0.65    # 中等威胁等级
+      combat_radius_km: 600.0          # 作战半径
+      stealth_penetration_capability: 0.40 # 隐身突防能力
+      electronic_warfare_suite: true    # 电子战套件
 
     - type: "水雷威胁"
       quantity: "50-100枚"
       types: "触发水雷、感应水雷、智能水雷"
       deployment_pattern: "分层布防"
+      threat_level_coefficient: 0.60    # 中等威胁等级
+      mine_detection_difficulty: 0.75  # 水雷探测难度
+      clearance_time_hours: [12.0, 48.0] # 扫雷时间
+      smart_mine_percentage: 0.30       # 智能水雷比例
 
   threat_coordination: "高（联合作战）"
   attack_timing: "可能选择夜间或恶劣天气"
+
+  # 威胁量化指标
+  threat_metrics:
+    overall_threat_index: 0.78         # 综合威胁指数 (0-1)
+    multi_domain_attack_capability: 0.82 # 多域攻击能力
+    saturation_attack_intensity: 0.70    # 饱和攻击强度
+    stealth_penetration_probability: 0.55 # 隐身突防概率
+    electronic_attack_spectrum: 0.65     # 电子攻击频谱
+    mine_countermeasure_complexity: 0.60 # 反水雷复杂性
 
 # 任务目标
 mission_objectives:
@@ -212,20 +266,92 @@ termination_criteria:
   convergence_generations: 15
   min_diversity: 0.12
 
-# 评估指标侧重
-evaluation_focus:
-  primary_indicators:
-    - "C3_1"  # 火力打击能力
-    - "C2_1"  # 任务规划能力
-    - "C1_1"  # 侦察探测能力
-    - "C4_1"  # 信息传输能力
-    - "C5_1"  # 抗毁能力
+# 动态权重调整
+scenario_weight_adjustments:
+  adjustment_rationale: "基于海峡要道控守作战特点，强化火力打击、协同作战和体系生存能力"
 
-  secondary_indicators:
-    - "C3_3"  # 电子对抗能力
-    - "C2_3"  # 决策响应能力
-    - "C4_3"  # 协同作战能力
-    - "C5_2"  # 任务恢复能力
+  primary_capability_adjustments:
+    C1:  # 态势感知能力
+      base_weight: 0.25
+      scenario_multiplier: 1.20    # 需要全面态势感知
+      final_weight: 0.26
+      justification: "海峡控守需要全面的战场态势感知"
+
+    C2:  # 指挥决策能力
+      base_weight: 0.20
+      scenario_multiplier: 1.15    # 复杂态势需要精确指挥
+      final_weight: 0.21
+      justification: "多域威胁需要快速准确的指挥决策"
+
+    C3:  # 行动打击能力
+      base_weight: 0.25
+      scenario_multiplier: 1.60    # 打击能力是核心需求
+      final_weight: 0.32
+      justification: "海峡控守的核心是强大的火力打击能力"
+
+    C4:  # 网络通联能力
+      base_weight: 0.15
+      scenario_multiplier: 1.30    # 多平台协同要求高
+      final_weight: 0.17
+      justification: "海峡作战需要强大的协同作战网络"
+
+    C5:  # 体系生存能力
+      base_weight: 0.15
+      scenario_multiplier: 1.40    # 高威胁环境生存重要
+      final_weight: 0.04
+      justification: "敌方饱和攻击要求高生存能力"
+
+  secondary_indicator_priorities:
+    # C3 - 行动打击能力
+    C3_1:  # 火力打击能力
+      weight_boost: 1.80
+      reasoning: "海峡控守的核心是强大的火力打击能力"
+
+    C3_3:  # 电子对抗能力
+      weight_boost: 1.50
+      reasoning: "需要对抗敌方电子攻击和干扰"
+
+    C3_2:  # 机动占位能力
+      weight_boost: 1.30
+      reasoning: "海峡地形复杂，机动占位关键"
+
+    # C2 - 指挥决策能力
+    C2_3:  # 决策响应能力
+      weight_boost: 1.40
+      reasoning: "敌方快速突袭需要快速决策响应"
+
+    C2_1:  # 任务规划能力
+      weight_boost: 1.25
+      reasoning: "复杂海峡环境需要精确任务规划"
+
+    # C4 - 网络通联能力
+    C4_3:  # 协同作战能力
+      weight_boost: 1.60
+      reasoning: "海峡作战依赖多平台协同作战"
+
+    # C5 - 体系生存能力
+    C5_1:  # 抗毁能力
+      weight_boost: 1.70
+      reasoning: "面临饱和攻击，抗毁能力至关重要"
+
+    C5_3:  # 持续作战能力
+      weight_boost: 1.40
+      reasoning: "海峡控守需要长时间持续作战"
+
+  # 评估指标侧重
+  evaluation_focus:
+    primary_indicators:
+      - "C3_1"  # 火力打击能力
+      - "C2_1"  # 任务规划能力
+      - "C1_1"  # 侦察探测能力
+      - "C4_1"  # 信息传输能力
+      - "C5_1"  # 抗毁能力
+
+    secondary_indicators:
+      - "C3_3"  # 电子对抗能力
+      - "C2_3"  # 决策响应能力
+      - "C4_3"  # 协同作战能力
+      - "C5_2"  # 任务恢复能力
 
 # 输出配置
 output_config:

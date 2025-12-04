@@ -261,12 +261,21 @@ def _validate_inputs(scheme_data: Dict[str, Any],
     if 'secondary_indicators' not in indicator_config:
         raise ConfigurationError("Missing 'secondary_indicators' in indicator configuration")
 
+    if len(indicator_config['secondary_indicators']) < 3:
+        raise ConfigurationError(f"Expected at least 3 secondary indicators, got {len(indicator_config['secondary_indicators'])}")
+
+    # Allow more than 15 indicators for flexibility, but log warning
     if len(indicator_config['secondary_indicators']) != 15:
-        raise ConfigurationError(f"Expected 15 secondary indicators, got {len(indicator_config['secondary_indicators'])}")
+        import warnings
+        warnings.warn(f"Expected 15 secondary indicators, got {len(indicator_config['secondary_indicators'])}. System will proceed with available indicators.")
 
     # Validate fuzzy configuration
     if 'fuzzy_scale' not in fuzzy_config:
-        raise ConfigurationError("Missing 'fuzzy_scale' in fuzzy configuration")
+        if 'linguistic_scale' in fuzzy_config:
+            # Allow alternative field name
+            fuzzy_config['fuzzy_scale'] = fuzzy_config['linguistic_scale']
+        else:
+            raise ConfigurationError("Missing 'fuzzy_scale' in fuzzy configuration")
 
     # Validate expert judgments (can be file path string or dict)
     if not expert_judgments:

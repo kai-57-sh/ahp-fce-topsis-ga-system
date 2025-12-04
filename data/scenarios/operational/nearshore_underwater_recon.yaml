@@ -19,6 +19,33 @@ operational_environment:
   weather_conditions: "中等到恶劣"
   electromagnetic_environment: "高干扰环境"
 
+  # 环境因子量化
+  environmental_factors:
+    sea_state_impact:
+      typical_sea_state: "4-6级"
+      wave_height_meters: [1.5, 4.0]
+      platform_performance_degradation: 0.25  # 平台性能衰减系数
+      sensor_effectiveness_reduction: 0.30     # 传感器效能降低
+      communication_range_impact: -0.20         # 通信距离影响
+
+    acoustic_conditions:
+      background_noise_level: 65.0  # 背景噪声等级 (dB)
+      sound_velocity_profile: "复杂分层"
+      detection_range_variation: 0.40  # 探测距离变化幅度
+      acoustic_stealth_advantage: 0.35 # 声学隐身优势
+
+    electromagnetic_environment:
+      jamming_signal_strength: -40.0  # 干扰信号强度 (dBm)
+      frequency_banding: "宽带干扰"
+      communication_ber_increase: 0.15  # 通信误码率增加
+      sensor_interference_factor: 0.25  # 传感器干扰因子
+
+    temperature_salinity:
+      water_temperature_celsius: [8.0, 18.0]  # 水温范围
+      salinity_psu: [32.0, 35.0]              # 盐度范围
+      thermocline_depth_meters: [15.0, 40.0] # 温跃层深度
+      sound_speed_variation_mps: 5.0          # 声速变化
+
 # 威胁设定
 threat_environment:
   primary_threats:
@@ -26,20 +53,37 @@ threat_environment:
       quantity: "2-4艘"
       capability: "常规动力潜艇，具备一定隐身性能"
       patrol_pattern: "区域巡逻、据点防御"
+      threat_level_coefficient: 0.75  # 中等威胁等级
+      detection_probability: 0.65     # 被发现概率
+      engagement_range_km: 15.0       # 交战距离
 
     - type: "水下固定设施"
       quantity: "3-5个"
       capability: "水下监听站、传感器网络"
       deployment_depth: "50-150米"
+      threat_level_coefficient: 0.6   # 中低威胁等级
+      detection_range_km: 8.0        # 探测距离
+      jamming_capability: 0.4        # 干扰能力
 
     - type: "小型水下无人机"
       quantity: "6-10部"
       capability: "侦察、骚扰、有限攻击能力"
       endurance: "24-48小时"
+      threat_level_coefficient: 0.5   # 低威胁等级
+      swarm_coordination: 0.3        # 群体协调能力
+      electronic_attack_power: 25    # 电子攻击功率
 
   threat_density: "中等"
   threat_coordination: "中等"
   anti_access_capabilities: "水雷、反潜巡逻"
+
+  # 威胁量化指标
+  threat_metrics:
+    overall_threat_index: 0.68         # 综合威胁指数 (0-1)
+    stealth_detection_difficulty: 0.72 # 隐身探测难度
+    electronic_attack_intensity: 0.45  # 电子攻击强度
+    anti_submarine_warfare_pressure: 0.60 # 反潜作战压力
+    mine_countermeasure_demand: 0.35   # 反水雷需求
 
 # 任务目标
 mission_objectives:
@@ -192,19 +236,86 @@ termination_criteria:
   convergence_generations: 12  # 连续12代无改进则停止
   min_diversity: 0.15         # 最小种群多样性
 
-# 评估指标侧重
-evaluation_focus:
-  primary_indicators:
-    - "C1_1"  # 侦察探测能力
-    - "C1_2"  # 信息融合能力
-    - "C2_2"  # 威胁评估能力
-    - "C4_1"  # 信息传输能力
-    - "C4_2"  # 网络可靠性
+# 动态权重调整
+scenario_weight_adjustments:
+  adjustment_rationale: "基于近岸水下侦察监视任务特点，增强态势感知和网络通信能力权重"
 
-  secondary_indicators:
-    - "C2_3"  # 决策响应能力
-    - "C3_2"  # 机动占位能力
-    - "C5_3"  # 持续作战能力
+  primary_capability_adjustments:
+    C1:  # 态势感知能力
+      base_weight: 0.25
+      scenario_multiplier: 1.40    # 强态势感知需求
+      final_weight: 0.32
+      justification: "水下侦察监视需要强大的态势感知能力"
+
+    C2:  # 指挥决策能力
+      base_weight: 0.20
+      scenario_multiplier: 1.25    # 威胁评估重要性提升
+      final_weight: 0.22
+      justification: "复杂水下环境威胁需要准确威胁评估"
+
+    C3:  # 行动打击能力
+      base_weight: 0.25
+      scenario_multiplier: 0.60    # 侦察任务，打击需求较低
+      final_weight: 0.12
+      justification: "重点在侦察自卫，打击能力需求相对较低"
+
+    C4:  # 网络通联能力
+      base_weight: 0.15
+      scenario_multiplier: 1.60    # 远距离通信需求高
+      final_weight: 0.22
+      justification: "水下监视需要可靠的实时数据传输"
+
+    C5:  # 体系生存能力
+      base_weight: 0.15
+      scenario_multiplier: 1.20    # 高威胁环境生存要求
+      final_weight: 0.12
+      justification: "敌方反潜能力强，体系生存能力重要"
+
+  secondary_indicator_priorities:
+    # C1 - 态势感知能力
+    C1_1:  # 侦察探测能力
+      weight_boost: 1.50
+      reasoning: "水下目标探测难度大，需要强化的探测能力"
+
+    C1_2:  # 信息融合能力
+      weight_boost: 1.40
+      reasoning: "多源水下信息融合对于准确态势理解至关重要"
+
+    C1_3:  # 态势理解能力
+      weight_boost: 1.20
+      reasoning: "复杂水下环境威胁判断需要深度态势理解"
+
+    # C2 - 指挥决策能力
+    C2_2:  # 威胁评估能力
+      weight_boost: 1.60
+      reasoning: "水下威胁类型多样，威胁评估是任务核心"
+
+    C2_3:  # 决策响应能力
+      weight_boost: 1.30
+      reasoning: "威胁响应速度直接影响任务安全"
+
+    # C4 - 网络通联能力
+    C4_2:  # 网络可靠性
+      weight_boost: 1.50
+      reasoning: "水下通信环境恶劣，网络可靠性至关重要"
+
+    C4_3:  # 协同作战能力
+      weight_boost: 1.25
+      reasoning: "多平台协同是提高监视效率的关键"
+
+  # 评估指标侧重
+  evaluation_focus:
+    primary_indicators:
+      - "C1_1"  # 侦察探测能力
+      - "C1_2"  # 信息融合能力
+      - "C2_2"  # 威胁评估能力
+      - "C4_1"  # 信息传输能力
+      - "C4_2"  # 网络可靠性
+
+    secondary_indicators:
+      - "C2_3"  # 决策响应能力
+      - "C3_2"  # 机动占位能力
+      - "C5_3"  # 持续作战能力
 
 # 输出配置
 output_config:

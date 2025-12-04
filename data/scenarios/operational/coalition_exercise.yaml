@@ -1,0 +1,241 @@
+# 多国联合作战演习场景
+# Coalition Exercise Scenario
+
+scenario_id: "coalition_exercise"
+scenario_name: "多国联合作战演习"
+scenario_type: "multinational_coordination"
+description: "多国海军联合演习，测试联合作战能力、互操作性和协同指挥体系"
+
+# 作战环境设定
+operational_environment:
+  geography:
+    area_type: "国际海域（演习区域）"
+    exercise_area_size: "500×500海里"
+    water_depth: "100-4000米"
+    international_waters: true
+    civilian_shipping_presence: "中等"
+
+  exercise_characteristics:
+    participation_nations: 5           # 参与国家数量
+    exercise_duration_days: 14         # 演习持续时间
+    complexity_level: "极高"           # 复杂度等级
+    interoperability_challenge: "高"   # 互操作性挑战
+
+  # 联合演习环境因子
+  environmental_factors:
+    multinational_coordination:
+      language_barrier_factor: 0.25    # 语言障碍因子
+      doctrinal_differences: 0.30       # 条令差异
+      equipment_compatibility: 0.60     # 装备兼容性
+      communication_standardization: 0.70 # 通信标准化程度
+
+    diplomatic_factors:
+      political_consensus_level: 0.80   # 政治共识度
+      rules_of_engagement_harmonization: 0.65 # 交战规则协调
+      intelligence_sharing_level: 0.75  # 情报共享水平
+      command_authority_clarity: 0.70   # 指挥权清晰度
+
+    technical_integration:
+      data_link_compatibility: 0.65      # 数据链兼容性
+      sensor_fusion_capability: 0.55    # 传感器融合能力
+      weapon_system_interoperability: 0.60 # 武器系统互操作性
+      c4isr_integration_level: 0.70     # C4ISR集成水平
+
+    operational_complexity:
+      multinational_task_organization: 0.80 # 多国任务组织
+      joint_operational_planning: 0.75    # 联合作战计划
+      coordinated_logistics_support: 0.60 # 协调后勤支持
+    shared_situational_awareness: 0.70   # 共享态势感知
+
+# 威胁设定
+threat_environment:
+  exercise_threat_simulation:
+    primary_threats:
+      - type: "模拟敌方战斗群"
+        quantity: "2-3艘模拟敌舰"
+        capability: "多功能威胁模拟"
+        threat_level_coefficient: 0.70   # 模拟威胁等级
+        red_team_capability: true        # 红队能力
+        behavior_replication_accuracy: 0.80 # 行为复制精度
+
+      - type: "电子战模拟威胁"
+        quantity: "多源电子攻击模拟"
+        capability: "通信干扰、雷达欺骗"
+        threat_level_coefficient: 0.65   # 电子战威胁等级
+        jamming_pattern_realism: 0.75    # 干扰模式真实性
+        cyber_attack_simulation: true     # 网络攻击模拟
+
+      - type: "潜艇威胁模拟"
+        quantity: "2-4艘模拟潜艇"
+        capability: "水下威胁模拟"
+        threat_level_coefficient: 0.60   # 水下威胁等级
+        acoustic_signature_simulation: 0.70 # 声学特征模拟
+        submarine_tactics_realism: 0.80   # 潜艇战术真实性
+
+      - type: "航空威胁模拟"
+        quantity: "6-10架模拟攻击机"
+        capability: "空中威胁模拟"
+        threat_level_coefficient: 0.55   # 航空威胁等级
+        flight_profile_realism: 0.75    # 飞行剖面真实性
+        weapon_simulation_fidelity: 0.80 # 武器模拟保真度
+
+  training_objective_emphasis:
+    "interoperability_validation": 0.80   # 互操作性验证
+    "joint_command_coordination": 0.75   # 联合指挥协调
+    "tactical_integration": 0.70          # 战术整合
+    "multinational_logistics": 0.60       # 多国后勤
+
+# 演习任务目标
+mission_objectives:
+  primary:
+    - objective: "多国联合作战验证"
+      weight: 0.30
+      description: "验证多国部队联合作战能力"
+      success_criteria: "互操作性评估≥80%，协同作战成功率≥75%"
+
+    - objective: "指挥体系协调测试"
+      weight: 0.25
+      description: "测试多国联合指挥体系"
+      success_criteria: "指挥链路畅通率≥90%，决策响应时间≤10分钟"
+
+    - objective: "技术互操作性评估"
+      weight: 0.25
+      description: "评估各国装备技术互操作性"
+      success_criteria: "系统兼容率≥70%，数据交换成功率≥85%"
+
+    - objective: "联合作战标准制定"
+      weight: 0.20
+      description: "制定联合作战标准作业程序"
+      success_criteria: "标准制定完成率≥90%，各国接受度≥80%"
+
+# 作战约束
+operational_constraints:
+  international_constraints:
+    international_law_compliance: true    # 国际法合规
+    territorial_waters_respect: true      # 领海尊重
+    civilian_shipping_safety: "最高级"    # 民用航运安全
+    environmental_protection: "严格"      # 环境保护
+
+  diplomatic_constraints:
+    national_sovereignty_respect: true    # 国家主权尊重
+    classified_information_protection: true # 机密信息保护
+    media_access_control: "协调管理"       # 媒体访问控制
+    observer_nation_participation: "限制"  # 观察国参与限制
+
+# 遗传算法参数
+ga_parameters:
+  population_size: 35
+  num_generations: 80
+  num_parents_mating: 7
+  crossover_rate: 0.70
+  mutation_rate: 0.18
+  parent_selection_type: "tournament"
+  crossover_type: "two_point"
+  mutation_type: "uniform"
+  keep_parents: 2
+  stop_criteria: "reach_target_fitness or generations"
+
+# 适应度函数权重
+objective_weights:
+  interoperability_achievement: 0.30     # 互操作性达成
+  coordination_effectiveness: 0.25       # 协调效能
+  technical_integration_success: 0.25    # 技术整合成功
+  multinational_satisfaction: 0.20       # 多国满意度
+
+# 动态权重调整
+scenario_weight_adjustments:
+  adjustment_rationale: "基于多国联合作战特点，强化协同作战能力、网络通信和互操作性"
+
+  primary_capability_adjustments:
+    C1:  # 态势感知能力
+      base_weight: 0.25
+      scenario_multiplier: 1.30    # 共享态势感知重要
+      final_weight: 0.28
+      justification: "多国作战需要统一的共享态势感知"
+
+    C2:  # 指挥决策能力
+      base_weight: 0.20
+      scenario_multiplier: 1.40    # 联合指挥关键
+      final_weight: 0.24
+      justification: "多国联合指挥体系是核心能力"
+
+    C3:  # 行动打击能力
+      base_weight: 0.25
+      scenario_multiplier: 1.10    # 协同打击需要
+      final_weight: 0.23
+      justification: "多国协同打击需要精确协调"
+
+    C4:  # 网络通联能力
+      base_weight: 0.15
+      scenario_multiplier: 1.80    # 互操作性核心
+      final_weight: 0.17
+      justification: "网络通联是多国互操作性的基础"
+
+    C5:  # 体系生存能力
+      base_weight: 0.15
+      scenario_multiplier: 1.00    # 标准生存需求
+      final_weight: 0.08
+      justification: "演习环境相对安全，生存能力要求正常"
+
+  secondary_indicator_priorities:
+    # C4 - 网络通联能力
+    C4_3:  # 协同作战能力
+      weight_boost: 2.00
+      reasoning: "协同作战是多国联合作战的核心"
+
+    C4_1:  # 信息传输能力
+      weight_boost: 1.80
+      reasoning: "多国信息传输是互操作性的基础"
+
+    C4_2:  # 网络可靠性
+      weight_boost: 1.60
+      reasoning: "网络可靠性确保多国通信稳定"
+
+    # C2 - 指挥决策能力
+    C2_1:  # 任务规划能力
+      weight_boost: 1.50
+      reasoning: "多国联合任务规划是成功关键"
+
+    C2_3:  # 决策响应能力
+      weight_boost: 1.40
+      reasoning: "多国决策响应需要快速准确"
+
+    # C1 - 态势感知能力
+    C1_2:  # 信息融合能力
+      weight_boost: 1.40
+      reasoning: "多源信息融合对共享态势理解关键"
+
+  # 评估指标侧重
+  evaluation_focus:
+    primary_indicators:
+      - "C4_3"  # 协同作战能力
+      - "C4_1"  # 信息传输能力
+      - "C2_1"  # 任务规划能力
+      - "C1_2"  # 信息融合能力
+      - "C3_1"  # 火力打击能力
+
+    secondary_indicators:
+      - "C4_2"  # 网络可靠性
+      - "C2_3"  # 决策响应能力
+      - "C5_3"  # 持续作战能力
+      - "C1_1"  # 侦察探测能力
+
+# 终止条件
+termination_criteria:
+  target_fitness: 0.82       # 目标适应度
+  max_generations: 80
+  convergence_generations: 15  # 连续15代无改进则停止
+  min_diversity: 0.12         # 最小种群多样性
+
+# 演习特殊要求
+scenario_specific_requirements:
+  international_participation: true      # 国际参与
+  multilingual_communication: true     # 多语言通信
+  diplomatic_coordination: true         # 外交协调
+  standardization_procedures: true      # 标准化程序
+  joint_training_evaluation: true       # 联合训练评估
+
+created_by: "multinational_exercise_planner"
+creation_date: "2025-12-04"
+version: "2.0"
+classification: "confidential"

@@ -34,6 +34,15 @@ python main.py visualize --plot-type comparison --input results.json --output co
 python main.py report --results results.json --include-methodology --output report.md
 ```
 
+### Environment Setup
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Validate installation
+python main.py --version
+```
+
 ### Testing
 ```bash
 # Run comprehensive test suite
@@ -45,6 +54,9 @@ python -m pytest tests/integration/ -v  # End-to-end workflow tests
 
 # Coverage reporting
 python -m pytest tests/ --cov=modules --cov-report=html
+
+# Quick validation with single test
+python -m pytest tests/unit/test_ahp.py::test_cr_calculation -v  # Test AHP consistency calculation
 ```
 
 ### Development Tools
@@ -52,6 +64,9 @@ python -m pytest tests/ --cov=modules --cov-report=html
 # Code formatting and linting
 black modules/ utils/ main.py
 flake8 modules/ utils/ main.py
+
+# Debug evaluation process
+python debug_evaluation.py  # Run step-by-step debugging of single scheme evaluation
 ```
 
 ## Architecture Overview
@@ -80,11 +95,17 @@ Input Schemes → Scenario Integration → AHP Weights → Fuzzy Scores → TOPS
 ```
 
 ### Configuration Structure
-- **`config/indicators.yaml`**: Five-dimensional capability hierarchy (C1-C5)
-- **`config/fuzzy_sets.yaml`**: Linguistic scale definitions (差/中/良/优)
-- **`data/expert_judgments/`**: AHP comparison matrices for weight calculation
-- **`data/scenarios/`**: Operational scenarios for context-aware evaluation
-- **`data/schemes/`**: Combat system configurations to evaluate
+- **`config/indicators.yaml`**: Five-dimensional capability hierarchy (C1-C5) with literature-based weights
+- **`config/fuzzy_sets.yaml`**: Linguistic scale definitions (差/中/良/优) and applicable indicators
+- **`data/expert_judgments/`**: AHP comparison matrices for weight calculation (primary + secondary indicators)
+- **`data/scenarios/`**: Operational scenarios for context-aware evaluation (v1.1.0+)
+- **`data/schemes/`**: Combat system configurations to evaluate (platform inventories and capabilities)
+
+#### Available Scheme Templates
+- **`balanced_force.yaml`**: Well-rounded multi-domain capability (baseline)
+- **`high_endurance_force.yaml`**: Extended operations with superior sustainment
+- **`tech_lite_force.yaml`**: Cost-effective solution with modern capabilities
+- **`template_scheme.yaml`**: Template for creating new configurations
 
 ### Critical Implementation Details
 
@@ -104,12 +125,16 @@ Input Schemes → Scenario Integration → AHP Weights → Fuzzy Scores → TOPS
 - Dynamic indicator weight adjustment based on operational context
 - Supports four operational scenarios: nearshore reconnaissance, strait control, amphibious landing, high-value blockade
 - Provides 70%+ improvement in evaluation accuracy for scenario-specific assessments
+- Each scenario has specific threat levels, success criteria, and operational constraints
+- Scenario files define weight adjustments, environmental factors, and mission priorities
 
 ### Important Constraints
 - AHP consistency ratio must be < 0.1 for valid weights
 - Fuzzy membership degrees must sum to 1.0
 - GA optimization respects budget and platform count constraints
 - All evaluations require valid deployment plans and task assignments
+- Scheme files must follow the exact schema in `data/schemes/template_scheme.yaml`
+- Expert judgment matrices must be square with consistent dimensions (2-15)
 
 ### Output Structure
 Results include:
@@ -131,3 +156,17 @@ The system maintains comprehensive test coverage including:
 - Configuration validation happens at multiple pipeline stages
 - Audit logging tracks all data transformations for reproducibility
 - Results are serialized to JSON with detailed metadata and validation status
+
+### File Conventions
+- **Scheme files**: YAML format following `template_scheme.yaml` structure with platform inventories
+- **Expert judgments**: Hierarchical matrices in `data/expert_judgments/` (primary + secondary indicators)
+- **Configuration files**: YAML format in `config/` directory with descriptive comments
+- **Output files**: JSON format with validation metadata and audit trails
+- **Test fixtures**: YAML files in `tests/fixtures/` for reproducible testing
+
+### Debugging Workflow
+1. Use `debug_evaluation.py` for step-by-step evaluation debugging
+2. Run single module tests to isolate issues: `python -m pytest tests/unit/test_ahp.py -v`
+3. Validate configuration files before running full evaluations
+4. Check audit trails in JSON outputs for transformation details
+5. Verify AHP consistency ratios (< 0.1) when encountering weight calculation errors

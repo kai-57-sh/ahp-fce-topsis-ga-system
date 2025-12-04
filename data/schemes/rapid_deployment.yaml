@@ -1,0 +1,271 @@
+# =============================================================================
+# 快速部署配置方案 - Rapid Deployment Force
+# =============================================================================
+# 专门优化快速反应和紧急部署能力的配置
+# 强调模块化设计、快速运输、即时部署和初期作战能力
+# =============================================================================
+
+scheme_id: "rapid_deployment"
+scheme_name: "快速部署配置方案"
+scheme_description: "专门优化快速反应能力的无人作战体系配置，强调模块化设计、快速运输、即时部署和初期作战能力，适用于紧急危机响应"
+created_by: "rapid_response_specialist"
+creation_date: "2025-12-04"
+scenario_context: "紧急危机响应，快速部署需求，初期作战能力"
+
+# ================================
+# 指挥与作战背景信息
+# ================================
+command_authority: "快速反应部队司令部"
+geographic_scope: "全球危机响应区域"
+threat_level: "动态变化"
+mission_type: "快速部署与初期作战"
+
+# ================================
+# 平台编成配置 - 快速响应优化
+# ================================
+platform_inventory:
+  USV_Unmanned_Surface_Vessel:                    # 无人水面舰艇 - 快速部署模块化设计
+    count: 8                                      # 中等规模
+    types:
+      modular_patrol_usv: 4                        # 模块化巡逻型USV（可快速改装）
+      rapid_assault_usv: 2                         # 快速突击型USV（高速设计）
+      command_control_usv: 1                       # 指挥控制USV（移动指挥所）
+      logistics_support_usv: 1                     # 后勤支援USV（快速补给）
+
+  UAV_Unmanned_Aerial_Vehicle:                     # 无人航空器 - 空中快速响应
+    count: 10                                     # 重点空中力量
+    types:
+      tactical_reconnaissance_uav: 5               # 战术侦察型UAV（快速部署）
+      rapid_strike_uav: 3                          # 快速打击型UAV（立即响应）
+      emergency_supplies_uav: 2                    # 应急补给UAV（物资投送）
+
+  UUV_Unmanned_Underwater_Vessel:                  # 无人水下航行器 - 快速部署水下力量
+    count: 6                                      # 快速水下部署
+    types:
+      portable_recon_uuv: 3                        # 便携式侦察UUV（快速布放）
+      rapid_mine_detection_uuv: 2                   # 快速探雷UUV（应急排雷）
+      shallow_water_assault_uuv: 1                  # 浅水攻击UUV（近岸作战）
+
+# ================================
+# 快速部署技术配置
+# ================================
+rapid_deployment_technology:
+  modular_design_features:
+    plug_and_play_modules: true                    # 即插即用模块
+    quick_change_interface_minutes: 15             # 快速更换接口时间
+    standardized_connection_system: true           # 标准化连接系统
+    hot_swappable_components: true                 # 热插拔组件
+
+  transportation_integration:
+    air_transportable_design: true                 # 空运可运输设计
+    containerized_shipping: true                   # 集装箱化运输
+    rapid_deployment_time_hours: 12                # 快速部署时间
+    global_reach_capability: true                  # 全球到达能力
+
+  autonomous_setup:
+    self_deployment_capability: true               # 自主部署能力
+    automatic_configuration_time_minutes: 30       # 自动配置时间
+    autonomous_formation_setup: true               # 自主编队组建
+    remote_activation_support: true                # 远程激活支持
+
+# ================================
+# 部署计划 - 快速响应部署
+# ================================
+deployment_plan:
+  primary_sector:
+    coordinates: [25.0, 121.0]
+    radius_km: 100.0
+  secondary_sectors:
+    - coordinates: [24.0, 120.0]
+      radius_km: 80.0
+    - coordinates: [26.0, 122.0]
+      radius_km: 80.0
+
+  rapid_response_protocol:
+    alert_to_launch_time_minutes: 30               # 警报到发射时间
+    transport_time_to_location_hours: 6            # 运输到目标时间
+    setup_time_hours: 2                            # 部署设置时间
+    operational_ready_hours: 8                     # 作战就绪时间
+
+  deployment_zones:
+    primary_zone:
+      coordinates: [25.0, 121.0]                   # 主要响应区域
+      deployment_radius_km: 100.0                  # 部署半径
+      response_time_minutes: 45                    # 响应时间
+
+    secondary_zones:
+      - coordinates: [24.0, 120.0]
+        response_time_minutes: 60
+      - coordinates: [26.0, 122.0]
+        response_time_minutes: 60
+
+  modular_deployment_patterns:
+    initial_response_package:
+      usv_allocation: 3                            # 初始USV分配
+      uav_allocation: 5                            # 初始UAV分配
+      uuv_allocation: 2                            # 初始UUV分配
+      mission_duration_days: 7                     # 任务持续时间
+
+    follow_on_forces:
+      reinforcement_timeline_hours: 48             # 增援时间线
+      additional_platforms_per_day: 2              # 每日增加平台
+      sustainable_operations_days: 30              # 可持续作战时间
+
+# ================================
+# 任务分配 - 快速响应任务
+# ================================
+task_assignments:
+  emergency_reconnaissance:
+    primary_assets: ["tactical_reconnaissance_uav", "portable_recon_uuv"]
+    reconnaissance_coverage_rate: 0.70
+    information_report_time_minutes: 30
+    continuous_recon_duration_hours: 6
+
+  rapid_assault_operations:
+    primary_assets: ["rapid_assault_usv", "rapid_strike_uav", "shallow_water_assault_uuv"]
+    target_acquisition_time_minutes: 15
+    strike_response_time_minutes: 10
+    initial_combat_effectiveness: 0.75
+
+  emergency_logistics:
+    primary_assets: ["emergency_supplies_uav", "logistics_support_usv"]
+    supply_delivery_rate_per_hour: 500              # 每小时补给量
+    medical_response_time_minutes: 20
+    emergency_shelter_capacity_persons: 50
+
+  command_control_setup:
+    primary_assets: ["command_control_usv"]
+    command_node_setup_time_minutes: 45
+    communication_establishment_time_minutes: 30
+    coordinated_operations_radius_km: 150
+
+  mine_countermeasures:
+    primary_assets: ["rapid_mine_detection_uuv"]
+    mine_detection_rate_per_hour: 2.0
+    safe_channel_creation_time_hours: 4
+    mine_disposal_success_rate: 0.80
+
+# ================================
+# 专家评估 - 快速响应能力
+# ================================
+expert_assessments:
+  expert_team: ["快速响应专家", "模块化系统工程师", "物流规划师", "战术分析师"]
+  assessment_date: "2025-12-04"
+
+  # 一级指标评估（快速响应重点）
+  primary_capabilities:
+    C1_态势感知能力:
+      overall_score: "良"
+      strengths: ["快速部署能力", "初期侦察优势", "灵活适应性"]
+      weaknesses: ["持续监视能力有限", "覆盖范围受限"]
+      rapid_deployment_enhancement: 0.85
+
+    C2_指挥决策能力:
+      overall_score: "良"
+      strengths: ["快速指挥建立", "简化决策流程", "自主操作能力"]
+      weaknesses: ["复杂指挥能力不足", "长期规划有限"]
+      rapid_deployment_enhancement: 0.90
+
+    C3_行动打击能力:
+      overall_score: "中"
+      strengths: ["快速响应能力", "初期打击优势", "灵活反应"]
+      weaknesses: ["持续作战能力有限", "火力持续性不足"]
+      rapid_deployment_enhancement: 0.80
+
+    C4_网络通联能力:
+      overall_score: "良"
+      strengths: ["快速通信建立", "模块化网络", "即插即用"]
+      weaknesses: ["网络覆盖范围有限", "带宽容量受限"]
+      rapid_deployment_enhancement: 0.85
+
+    C5_体系生存能力:
+      overall_score: "中"
+      strengths: ["快速撤离能力", "分散部署", "灵活机动"]
+      weaknesses: ["防护能力有限", "长期生存能力不足"]
+      rapid_deployment_enhancement: 0.75
+
+# ================================
+# 成本分析
+# ================================
+budget_analysis:
+  total_cost_million_usd: 95.0                    # 总成本（含快速部署技术）
+  cost_breakdown:
+    usv_costs: 35.0                                # USV成本（模块化设计）
+    uav_costs: 40.0                                # UAV成本（快速响应）
+    uuv_costs: 20.0                                # UUV成本（便携式设计）
+
+  rapid_deployment_technology_costs:
+    modular_systems: 15.0                           # 模块化系统
+    rapid_transport_integration: 8.0                # 快速运输集成
+    autonomous_setup_systems: 12.0                  # 自主部署系统
+    emergency_response_equipment: 10.0              # 应急响应装备
+
+  cost_effectiveness_metrics:
+    deployment_speed_advantage: 3.5                 # 部署速度优势
+    response_time_reduction_percent: 70             # 响应时间减少百分比
+    initial_operational_capability_ratio: 0.80     # 初始作战能力比
+    cost_per_response_time_saved: 2.5              # 每节省响应时间成本
+
+# ================================
+# 快速部署作战原则
+# ================================
+rapid_deployment_doctrine:
+  speed_over_completeness_principles:
+    - principle: "速度优先原则"
+      description: "初期快速部署比完全配置更重要"
+      implementation: "模块化快速部署"
+
+    - principle: "立即响应原则"
+      description: "在24小时内建立基本作战能力"
+      implementation: "快速部署协议"
+
+    - principle: "持续增强原则"
+      description: "初始部署后持续增强能力"
+      implementation: "增援部队部署"
+
+  contingency_planning:
+    rapid_extraction_capability: true               # 快速撤离能力
+    emergency_evacuation_support: true              # 应急撤离支援
+    disaster_response_preparation: true            # 灾难响应准备
+    humanitarian_aid_capability: true              # 人道主义援助能力
+
+# ================================
+# 维护与训练
+# ================================
+maintenance_training:
+  rapid_maintenance_protocols:
+    pre_deployment_checklist_time_minutes: 30      # 部署前检查时间
+    field_maintenance_capability: true             # 野外维护能力
+    modular_replacement_time_minutes: 15           # 模块更换时间
+    diagnostic_system_coverage: 0.90               # 诊断系统覆盖率
+
+  rapid_training_programs:
+    crew_deployment_training_hours: 40              # 人员部署培训小时数
+    mission_planning_time_hours: 4                 # 任务规划时间
+    cross_training_coverage: 0.80                  # 交叉培训覆盖率
+    simulation_based_training_ratio: 0.75          # 基于仿真培训比例
+
+# ================================
+# 预期作战效果
+# ================================
+expected_outcomes:
+  rapid_deployment_effectiveness:
+    deployment_time_reduction_percent: 65           # 部署时间减少百分比
+    initial_combat_readiness_time_hours: 8         # 初始作战就绪时间
+    force_projection_speed_multiplier: 2.5          # 兵力投送速度倍数
+    mission_success_probability: 0.75              # 任务成功概率
+
+  operational_capabilities:
+    day_1_operational_capability: 0.60             # 第1天作战能力
+    day_3_operational_capability: 0.80             # 第3天作战能力
+    day_7_operational_capability: 0.90             # 第7天作战能力
+    sustained_operations_duration_days: 30         # 持续作战时间
+
+# ================================
+# 输出配置
+# ================================
+output_configuration:
+  generate_deployment_analysis: true                # 生成部署分析
+  create_rapid_response_report: true               # 创建快速响应报告
+  export_modular_capabilities_summary: true       # 导出模块化能力摘要
+  generate_time_to_operation_metrics: true         # 生成时间到作战能力指标

@@ -73,7 +73,21 @@ def topsis_rank(decision_matrix: np.ndarray,
 
     # Step 5: Calculate relative closeness coefficients
     # Ci = D_minus / (D_plus + D_minus)
-    Ci = D_minus / (D_plus + D_minus)
+    # Handle potential division by zero (when D_plus + D_minus = 0)
+    denominator = D_plus + D_minus
+    # Check for zero denominator and handle appropriately
+    zero_denominator_mask = denominator < 1e-15  # Use small epsilon for numerical stability
+    Ci = np.zeros_like(denominator)
+
+    # Normal case: calculate Ci
+    normal_mask = ~zero_denominator_mask
+    if np.any(normal_mask):
+        Ci[normal_mask] = D_minus[normal_mask] / denominator[normal_mask]
+
+    # Edge case: when denominator is zero (alternatives are identical)
+    if np.any(zero_denominator_mask):
+        # For identical alternatives, assign equal Ci values (0.5 is neutral)
+        Ci[zero_denominator_mask] = 0.5
 
     # Step 6: Rank alternatives based on Ci (higher Ci = better rank)
     rankings = len(Ci) - np.argsort(Ci).argsort()  # Convert to 1-based ranking

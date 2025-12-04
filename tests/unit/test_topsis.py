@@ -12,7 +12,8 @@ import os
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
-from modules.topsis_module import topsis_rank, identify_ideal_solutions, vector_normalize, TOPSISError
+from modules.topsis_module import topsis_rank, identify_ideal_solutions, TOPSISError
+from utils.normalization import vector_normalize
 
 
 class TestTOPSISModule:
@@ -197,27 +198,27 @@ class TestTOPSISModule:
         weights = np.array([0.33, 0.33, 0.34])
         indicator_types = ['benefit', 'benefit', 'benefit']
 
-        with pytest.raises(TOPSISISError):  # Should require at least 2 alternatives
+        with pytest.raises(TOPSISError):  # Should require at least 2 alternatives
             topsis_rank(single_alternative, weights, indicator_types)
 
     def test_topsis_rank_invalid_weights(self, sample_decision_matrix, sample_indicator_types):
         """Test TOPSIS ranking with invalid weights."""
         invalid_weights = np.array([0.5, 0.3, 0.2])  # Wrong length
 
-        with pytest.raises(TOPSISISError):
+        with pytest.raises(TOPSISError):
             topsis_rank(sample_decision_matrix, invalid_weights, sample_indicator_types)
 
         # Test with weights that don't sum to 1
         weights_not_summing = np.array([0.5, 0.5, 0.5, 0.5])  # Sums to 2.0
 
-        with pytest.raises(TOPSISISError):
+        with pytest.raises(TOPSISError):
             topsis_rank(sample_decision_matrix, weights_not_summing, sample_indicator_types)
 
     def test_topsis_rank_invalid_indicator_types(self, sample_decision_matrix, sample_weights):
         """Test TOPSIS ranking with invalid indicator types."""
         invalid_types = ['benefit', 'invalid', 'cost', 'benefit']
 
-        with pytest.raises(TOPSISISError):
+        with pytest.raises(TOPSISError):
             topsis_rank(sample_decision_matrix, sample_weights, invalid_types)
 
     def test_topsis_rank_negative_values(self):
@@ -230,7 +231,7 @@ class TestTOPSISModule:
         weights = np.array([0.33, 0.33, 0.34])
         indicator_types = ['benefit', 'cost', 'benefit']
 
-        with pytest.raises(TOPSISISError):
+        with pytest.raises(TOPSISError):
             topsis_rank(negative_matrix, weights, indicator_types)
 
     def test_topsis_distance_calculations(self, sample_decision_matrix, sample_weights, sample_indicator_types):

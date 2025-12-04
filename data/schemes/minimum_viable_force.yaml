@@ -1,0 +1,254 @@
+# =============================================================================
+# 最低可行配置方案 - Minimum Viable Force
+# =============================================================================
+# 成本效益最优的基础配置，满足基本作战需求的同时最大化性价比
+# 适用于预算有限但需要保持基本作战能力的情况
+# =============================================================================
+
+scheme_id: "minimum_viable_force"
+scheme_name: "最低可行配置方案"
+scheme_description: "成本效益最优的基础无人作战体系配置，以最小成本满足基本作战需求，重点保障核心能力而非全面覆盖"
+created_by: "cost_optimization_analyst"
+creation_date: "2025-12-04"
+scenario_context: "预算受限条件下的基础防御作战，中低威胁等级"
+
+# ================================
+# 指挥与作战背景信息
+# ================================
+command_authority: "区域防御司令部"
+geographic_scope: "近岸防御区域"
+threat_level: "中低"
+mission_type: "基础多域防御"
+
+# ================================
+# 平台编成配置 - 最精简配置
+# ================================
+platform_inventory:
+  USV_Unmanned_Surface_Vessel:                    # 无人水面舰艇 - 重点保障侦察和基本防御
+    count: 6                                      # 最小规模
+    types:
+      patrol_usv: 3                                # 巡逻型USV（核心侦察）
+      surveillance_usv: 2                          # 侦察型USV（情报收集）
+      mine_hunting_usv: 1                          # 反水雷USV（基础防御）
+
+  UAV_Unmanned_Aerial_Vehicle:                     # 无人航空器 - 突出侦察和指挥控制
+    count: 5                                       # 精简配置
+    types:
+      surveillance_uav: 3                          # 侦察型UAV（主要情报源）
+      ew_uav: 2                                    # 电子战UAV（基本电子防御）
+
+  UUV_Unmanned_Underwater_Vessel:                  # 无人水下航行器 - 基础水下监视
+    count: 4                                       # 最低配置
+    types:
+      reconnaissance_uuv: 3                          # 侦察型UUV（水下监视）
+      mcm_uuv: 1                                   # 反水雷UUV（补充反水雷能力）
+
+# ================================
+# 部署计划 - 集中部署核心区域
+# ================================
+deployment_plan:
+  primary_sector:
+    coordinates: [25.0, 121.0]                     # 中心坐标
+    radius_km: 80.0                                # 防御半径
+  secondary_sectors:
+    - coordinates: [25.5, 121.5]
+      radius_km: 60.0
+    - coordinates: [24.5, 121.5]
+      radius_km: 60.0
+
+  patrol_routes:
+    - route_id: "alpha_defense"
+      waypoints: [[25.0, 121.0], [25.5, 121.5], [25.0, 121.0]]
+      patrol_type: "circular"
+      asset_assignment: ["USV_1", "USV_2"]
+
+  surveillance_network:
+    outer_ring_distance: 60.0                     # 外环距离
+    inner_ring_distance: 30.0                     # 内环距离
+    sensor_overlap_ratio: 0.3                      # 传感器重叠率
+    coverage_percentage: 65.0                      # 覆盖率要求
+
+  response_time_targets:
+    threat_detection_to_response: 20.0             # 威胁检测到响应（分钟）
+    threat_engagement_time: 15.0                   # 威胁交战时间（分钟）
+    asset_protection_response: 10.0                # 资产保护响应（分钟）
+
+# ================================
+# 任务分配 - 优先核心任务
+# ================================
+task_assignments:
+  surveillance_operations:
+    primary_assets: ["surveillance_usv", "surveillance_uav", "reconnaissance_uuv"]
+    coverage_requirement: 0.65
+    endurance_hours: 72
+    update_frequency_min: 20
+
+  threat_defense:
+    primary_assets: ["patrol_usv", "ew_uav"]
+    detection_probability: 0.60
+    patrol_density: 0.50
+    response_time_min: 20
+
+  mine_countermeasures:
+    primary_assets: ["mine_hunting_usv", "mcm_uuv"]
+    clearance_area_coverage: 0.70
+    clearance_time_hours: 24
+    safety_margin_meters: 500
+
+# ================================
+# 专家评估 - 基础能力评估
+# ================================
+expert_assessments:
+  expert_team: ["预算分析师", "防御规划师", "作战参谋"]
+  assessment_date: "2025-12-04"
+
+  # 一级指标评估（采用简化4级评估）
+  primary_capabilities:
+    C1_态势感知能力:
+      overall_score: "良"
+      strengths: ["成本效益高", "核心区域覆盖充分"]
+      weaknesses: ["覆盖范围有限", "全天候能力不足"]
+      confidence_level: 0.75
+
+    C2_指挥决策能力:
+      overall_score: "中"
+      strengths: ["指挥链简化", "响应快速"]
+      weaknesses: ["多任务处理能力有限", "复杂态势理解不足"]
+      confidence_level: 0.70
+
+    C3_行动打击能力:
+      overall_score: "中"
+      strengths: ["防御能力均衡", "成本控制有效"]
+      weaknesses: ["攻击能力有限", "火力持续性不足"]
+      confidence_level: 0.65
+
+    C4_网络通联能力:
+      overall_score: "中"
+      strengths: ["网络结构简单", "维护成本低"]
+      weaknesses: ["冗余度不足", "抗干扰能力有限"]
+      confidence_level: 0.70
+
+    C5_体系生存能力:
+      overall_score: "良"
+      strengths: ["目标小，隐蔽性好", "分布式部署"]
+      weaknesses: ["系统恢复能力有限", "抗饱和攻击能力不足"]
+      confidence_level: 0.75
+
+# ================================
+# 成本预算分析
+# ================================
+budget_analysis:
+  total_cost_million_usd: 45.0                    # 总预算（百万美元）
+  cost_breakdown:
+    USV_costs: 18.0                                # USV总成本
+    UAV_costs: 15.0                                # UAV总成本
+    UUV_costs: 12.0                                # UUV总成本
+
+  cost_efficiency_metrics:
+    cost_per_km2_coverage: 0.12                     # 每平方公里覆盖成本
+    cost_per_detection_probability: 0.08           # 每探测概率成本
+    annual_operational_cost_million_usd: 8.5        # 年运营成本
+    roi_estimation: 2.8                            # 投资回报率估算
+
+# ================================
+# 运行约束
+# ================================
+operational_constraints:
+  personnel_requirements:
+    total_operators: 15                             # 操作人员总数
+    specialized_maintainers: 5                       # 专业维护人员
+    command_staff: 3                                # 指挥人员
+    training_requirements_hours: 120               # 培训需求小时数
+
+  logistical_support:
+    maintenance_interval_hours: 72                 # 维护间隔
+    supply_reserve_days: 15                         # 供应储备天数
+    fuel_consumption_liters_per_day: 500            # 日燃料消耗
+    spare_parts_inventory_ratio: 0.15               # 备件库存比例
+
+  environmental_constraints:
+    weather_operational_limits: "海浪≤4级，风速≤20节"    # 气象作业限制
+    electromagnetic_compatibility: "民用频段避让"     # 电磁兼容要求
+    environmental_impact_assessment: "通过"         # 环境影响评估
+
+# ================================
+# 性能预期
+# ================================
+performance_expectations:
+  operational_metrics:
+    surveillance_coverage_km2: 3500                # 监视覆盖面积
+    threat_detection_probability: 0.65             # 威胁探测概率
+    response_time_minutes: 20.0                    # 响应时间
+    continuous_operation_hours: 18.0               # 连续作业时间
+
+  cost_effectiveness:
+    cost_per_threat_neutralized_million_usd: 3.5   # 每威胁中和成本
+    operational_cost_ratio: 0.19                   # 运营成本比率
+    equipment_utilization_rate: 0.75               # 设备利用率
+    mission_success_probability: 0.70              # 任务成功概率
+
+# ================================
+# 风险评估
+# ================================
+risk_assessment:
+  high_risk_factors:
+    - risk: "覆盖范围不足"
+      probability: 0.60
+      impact: "中等"
+      mitigation_strategy: "重点区域集中部署"
+
+    - risk: "系统冗余度不足"
+      probability: 0.45
+      impact: "高"
+      mitigation_strategy: "模块化设计，快速更换"
+
+  operational_risks:
+    - risk: "维护需求超出预期"
+      probability: 0.35
+      impact: "中等"
+      mitigation_strategy: "预防性维护计划"
+
+# ================================
+# 扩展建议
+# ================================
+expansion_recommendations:
+  phased_upgrade_options:
+    - phase: "第一阶段（6个月后）"
+      additions: "+2 USV, +2 UAV"
+      capability_improvement: "覆盖率提升20%"
+      additional_cost: 12.0
+
+    - phase: "第二阶段（12个月后）"
+      additions: "+3 UUV, 增强指挥系统"
+      capability_improvement: "全天候能力提升30%"
+      additional_cost: 18.0
+
+  alternative_configurations:
+    - option: "区域重点配置"
+      modification: "集中资源保护关键区域"
+      trade_off: "牺牲部分覆盖换取重点区域强化"
+      cost_change: -5.0
+
+# ================================
+# 验证要求
+# ================================
+validation_requirements:
+  performance_validation:
+    minimum_surveillance_coverage: 0.60           # 最低监视覆盖率
+    minimum_threat_detection_rate: 0.55          # 最低威胁探测率
+    maximum_response_time_minutes: 25.0          # 最大响应时间
+    minimum_uptime_percentage: 0.85              # 最低正常运行时间
+
+  cost_validation:
+    maximum_operational_cost_ratio: 0.25         # 最大运营成本比率
+    minimum_cost_effectiveness_score: 0.70       # 最低成本效益分数
+    maximum_payback_period_years: 4.0            # 最大投资回收期
+
+# ================================
+# 输出配置
+# ================================
+output_configuration:
+  generate_comparative_analysis: true             # 生成对比分析
+  create_cost_benefit_report: true               # 创建成本效益报告
+  export_configuration_summary: true             # 导出配置摘要
+  generate_deployment_timeline: true             # 生成部署时间线

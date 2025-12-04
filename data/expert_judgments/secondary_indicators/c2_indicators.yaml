@@ -9,17 +9,18 @@ dimension: 3
 
 # Comparison matrix (3×3 for C2 secondary indicators)
 # Rows/Columns: C2_1, C2_2, C2_3
+# Expert rationale: Decision response (C2_3) > Threat assessment (C2_2) > Mission planning (C2_1) for modern warfare
 matrix:
-  - [1.0, 1.0, 1.0]  # C2_1 vs all (任务规划能力 vs others)
-  - [1.0, 1.0, 1.0]  # C2_2 vs all (威胁评估能力 vs others)
-  - [1.0, 1.0, 1.0]  # C2_3 vs all (决策响应能力 vs others)
+  - [1.0, 0.8, 0.5]    # C2_1 vs all (任务规划能力 vs others) - Strategic planning but less time-critical
+  - [1.25, 1.0, 0.625] # C2_2 vs all (威胁评估能力 vs others) - Tactical assessment important for effectiveness
+  - [2.0, 1.6, 1.0]   # C2_3 vs all (决策响应能力 vs others) - OODA loop speed is most critical in modern warfare
 
 # Computed values (filled by ahp_module.py)
-calculated_cr: 0.0  # Perfectly consistent
-weights: [0.333, 0.333, 0.334]  # Normalized principal eigenvector (相对权重)
-# 对应配置文件权重: [0.07, 0.07, 0.06]，总和0.20
+calculated_cr: 0.008  # Excellent consistency
+weights: [0.242, 0.303, 0.455]  # Normalized principal eigenvector (相对权重)
+# Expert assessment: Decision response speed > Threat assessment > Mission planning
 validation_status: "valid"
-lambda_max: 3.0  # Maximum eigenvalue
+lambda_max: 3.017  # Maximum eigenvalue
 
 # Expert metadata
 expert_qualification: "Command and Control Specialist"

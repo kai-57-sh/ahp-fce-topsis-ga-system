@@ -1,0 +1,61 @@
+[run]
+# Source code directories to measure coverage for
+source =
+    modules
+    utils
+    main.py
+
+# Files and directories to omit from coverage measurement
+omit =
+    */tests/*
+    */test_*
+    setup.py
+    */__pycache__/*
+    */.*
+    build/*
+    dist/*
+    *.egg-info/*
+    htmlcov/*
+    .coverage
+    .pytest_cache/*
+
+# Coverage settings
+branch = True
+precision = 2
+fail_under = 95
+parallel = true
+concurrency = thread
+
+[report]
+# Report formatting settings
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    if self.debug:
+    if settings.DEBUG
+    raise AssertionError
+    raise NotImplementedError
+    if 0:
+    if __name__ == .__main__.:
+    class .*\bProtocol\):
+    @(abc\.)?abstractmethod
+
+show_missing = True
+precision = 2
+skip_covered = False
+
+[html]
+# HTML report settings
+directory = htmlcov
+skip_covered = False
+show_contexts = True
+
+[xml]
+# XML report settings (for CI/CD integration)
+output = coverage.xml
+
+[paths]
+# Path mapping for different environments
+source =
+    .
+    */site-packages
