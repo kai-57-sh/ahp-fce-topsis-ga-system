@@ -1,0 +1,229 @@
+# 近岸水下侦察监视作战场景
+# Near-Shore Underwater Reconnaissance Surveillance Scenario
+
+scenario_id: "nearshore_underwater_recon"
+scenario_name: "近岸水下侦察监视作战"
+scenario_type: "reconnaissance_surveillance"
+description: "在近岸复杂水下环境中执行持续水下侦察监视任务，对抗敌方潜艇、水下设施等威胁"
+
+# 作战环境设定
+operational_environment:
+  geography:
+    area_type: "近岸海域"
+    water_depth: "20-200米"
+    coastline_complexity: "高（复杂岸线、岛屿、海湾）"
+    hydrological_conditions: "潮流多变、水下声学条件复杂"
+
+  threat_level: "中高级"
+  mission_duration_hours: 72
+  weather_conditions: "中等到恶劣"
+  electromagnetic_environment: "高干扰环境"
+
+# 威胁设定
+threat_environment:
+  primary_threats:
+    - type: "敌方潜艇"
+      quantity: "2-4艘"
+      capability: "常规动力潜艇，具备一定隐身性能"
+      patrol_pattern: "区域巡逻、据点防御"
+
+    - type: "水下固定设施"
+      quantity: "3-5个"
+      capability: "水下监听站、传感器网络"
+      deployment_depth: "50-150米"
+
+    - type: "小型水下无人机"
+      quantity: "6-10部"
+      capability: "侦察、骚扰、有限攻击能力"
+      endurance: "24-48小时"
+
+  threat_density: "中等"
+  threat_coordination: "中等"
+  anti_access_capabilities: "水雷、反潜巡逻"
+
+# 任务目标
+mission_objectives:
+  primary:
+    - objective: "持续水下监视"
+      weight: 0.35
+      description: "对指定海域实施24/7水下监视"
+      success_criteria: "覆盖率≥90%，目标发现率≥80%"
+
+    - objective: "目标识别与跟踪"
+      weight: 0.30
+      description: "识别、分类并持续跟踪水下目标"
+      success_criteria: "识别准确率≥85%，跟踪稳定时间≥6小时"
+
+    - objective: "威胁预警"
+      weight: 0.20
+      description: "及时发现并预警水下威胁"
+      success_criteria: "预警时间≥30分钟，虚警率≤15%"
+
+    - objective: "信息数据链维持"
+      weight: 0.15
+      description: "保持与指挥中心的数据通信"
+      success_criteria: "通信连通率≥95%，数据延迟≤5分钟"
+
+# 作战约束
+operational_constraints:
+  rules_of_engagement:
+    engagement_authority: "防御性反击"
+    identification_requirement: "严格识别（PID≥95%）"
+    collateral_damage_tolerance: "极低"
+
+  area_restrictions:
+    operating_area: "距离海岸线200海里内"
+    exclusion_zones: "民用航道、渔业区、生态保护区"
+    depth_limits: "根据平台类型确定"
+
+  coordination_requirements:
+    friendly_forces: "岸基指挥中心、海上巡逻机、水面舰艇"
+    data_sharing: "实时数据共享，多源信息融合"
+    communication_protocols: " Link-11/16、卫星通信"
+
+# 基因编码配置
+chromosome_encoding:
+  genes:
+    # 无人水面艇配置
+    - name: "num_patrol_usv"
+      type: "integer"
+      range: [3, 8]
+      description: "巡逻USV数量（负责水面监视、通信中继）"
+      role: "surveillance_communication"
+
+    - name: "num_surveillance_usv"
+      type: "integer"
+      range: [2, 6]
+      description: "监视USV数量（配备拖曳阵声呐）"
+      role: "underwater_surveillance"
+
+    - name: "num_support_usv"
+      type: "integer"
+      range: [1, 4]
+      description: "支援USV数量（指挥控制、数据融合）"
+      role: "command_support"
+
+    # 无人水下艇配置
+    - name: "num_reconnaissance_uuv"
+      type: "integer"
+      range: [4, 8]
+      description: "侦察UUV数量（被动声呐侦察）"
+      role: "covert_reconnaissance"
+
+    - name: "num_mcm_uuv"
+      type: "integer"
+      range: [2, 5]
+      description: "反水雷UUV数量"
+      role: "mine_countermeasures"
+
+    - name: "num_attack_uuv"
+      type: "integer"
+      range: [0, 3]
+      description: "攻击UUV数量（仅用于自卫）"
+      role: "self_defense"
+
+# 约束条件
+constraints:
+  budget:
+    type: "hard"
+    max_budget_million_usd: 80.0
+    cost_per_platform:
+      patrol_usv: 3.0
+      surveillance_usv: 4.5
+      support_usv: 5.5
+      reconnaissance_uuv: 6.0
+      mcm_uuv: 4.0
+      attack_uuv: 8.0
+
+  platform_limits:
+    type: "hard"
+    total_platforms:
+      min: 12
+      max: 25
+    usv_limits:
+      min: 6
+      max: 15
+    uuv_limits:
+      min: 6
+      max: 12
+
+  capability_requirements:
+    type: "soft"
+    minimum_surveillance_coverage: 0.85  # 85%海域覆盖率
+    minimum_underwater_detection_range: 15.0  # 15公里
+    minimum_communication_reliability: 0.90  # 90%通信可靠性
+    minimum_endurance_hours: 48  # 48小时持续作战
+
+  deployment_area:
+    type: "hard"
+    max_deployment_radius_km: 150  # 距离基地最大距离
+    min_coverage_percentage: 90  # 最小覆盖率要求
+    primary_sector_radius_km: 80  # 主要作战区域半径
+
+  endurance:
+    type: "hard"
+    minimum_endurance_hours: 48
+    maximum_endurance_hours: 120
+
+# 遗传算法参数
+ga_parameters:
+  population_size: 30
+  num_generations: 60
+  num_parents_mating: 6
+  crossover_rate: 0.8
+  mutation_rate: 0.15
+  parent_selection_type: "tournament"
+  crossover_type: "single_point"
+  mutation_type: "random"
+  keep_parents: 2
+  stop_criteria: "reach_target_fitness or generations"
+
+# 适应度函数权重
+objective_weights:
+  surveillance_effectiveness: 0.35    # 监视效能
+  target_tracking_capability: 0.30    # 目标跟踪能力
+  warning_timeliness: 0.20           # 预警及时性
+  communication_reliability: 0.15     # 通信可靠性
+
+# 终止条件
+termination_criteria:
+  target_fitness: 0.88       # 目标适应度
+  max_generations: 60
+  convergence_generations: 12  # 连续12代无改进则停止
+  min_diversity: 0.15         # 最小种群多样性
+
+# 评估指标侧重
+evaluation_focus:
+  primary_indicators:
+    - "C1_1"  # 侦察探测能力
+    - "C1_2"  # 信息融合能力
+    - "C2_2"  # 威胁评估能力
+    - "C4_1"  # 信息传输能力
+    - "C4_2"  # 网络可靠性
+
+  secondary_indicators:
+    - "C2_3"  # 决策响应能力
+    - "C3_2"  # 机动占位能力
+    - "C5_3"  # 持续作战能力
+
+# 输出配置
+output_config:
+  save_generation_history: true
+  save_best_solutions: true
+  save_diversity_metrics: true
+  create_convergence_plots: true
+  export_solution_yaml: true
+  detailed_analysis_report: true
+
+# 场景特殊要求
+scenario_specific_requirements:
+  stealth_emphasis: true      # 强调隐身性能
+  passive_sensors_priority: true  # 优先被动传感器
+  data_fusion_requirement: high    # 高要求数据融合
+  acoustic_stealth_factor: 1.2    # 声学隐身因子
+  magnetic_stealth_factor: 1.1    # 磁隐身因子
+
+created_by: "naval_warfare_analyst"
+creation_date: "2025-10-25"
+version: "1.0"
+classification: "secret"

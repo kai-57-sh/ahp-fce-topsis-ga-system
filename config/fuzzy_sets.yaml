@@ -1,0 +1,103 @@
+# Fuzzy Evaluation Sets Configuration
+# 4-level linguistic scale for qualitative indicators
+
+fuzzy_scale:
+  差:
+    value: 0.25
+    description: "Poor performance - fails to meet minimum requirements"
+    english_equivalent: "Poor"
+
+  中:
+    value: 0.50
+    description: "Average performance - meets basic requirements"
+    english_equivalent: "Average"
+
+  良:
+    value: 0.75
+    description: "Good performance - exceeds requirements"
+    english_equivalent: "Good"
+
+  优:
+    value: 1.00
+    description: "Excellent performance - significantly exceeds requirements"
+    english_equivalent: "Excellent"
+
+applicable_indicators:
+  # Indicators that use fuzzy evaluation (qualitative assessment)
+  # 根据config/indicators.yaml中的标准指标名称进行更新
+  C1_2: "信息融合能力 (Information Fusion Capability)"
+  C2_2: "威胁评估能力 (Threat Assessment Capability)"
+  C3_2: "机动占位能力 (Maneuver & Positioning Capability)"
+  C4_2: "网络可靠性 (Network Reliability)"
+  C5_1: "抗毁能力 (Anti-Destruction Capability)"
+  C5_3: "持续作战能力 (Sustained Operations Capability)"
+
+expert_assessment_template:
+  # Structure for expert input
+  # 根据修正后的指标名称更新示例
+  expert_id: "expert_001"
+  indicator_id: "C1_2"  # 信息融合能力
+  indicator_name: "信息融合能力 (Information Fusion Capability)"
+  assessments:
+    差: 0    # Number of experts rating as "Poor"
+    中: 1    # Number of experts rating as "Average"
+    良: 3    # Number of experts rating as "Good"
+    优: 1    # Number of experts rating as "Excellent"
+
+  # Calculated values (filled by fce_module.py)
+  total_experts: 5
+  membership_vector: [0.0, 0.2, 0.6, 0.2]  # Normalized counts
+  fuzzy_score: 0.65  # Weighted average
+
+# Additional examples for other indicators
+example_assessments:
+  C2_2:  # 威胁评估能力
+    indicator_name: "威胁评估能力 (Threat Assessment Capability)"
+    example_assessment:
+      差: 1
+      中: 2
+      良: 1
+      优: 1
+    expected_fuzzy_score: 0.55
+
+  C3_2:  # 机动占位能力
+    indicator_name: "机动占位能力 (Maneuver & Positioning Capability)"
+    example_assessment:
+      差: 0
+      中: 1
+      良: 2
+      优: 2
+    expected_fuzzy_score: 0.80
+
+  C4_2:  # 网络可靠性
+    indicator_name: "网络可靠性 (Network Reliability)"
+    example_assessment:
+      差: 0
+      中: 0
+      良: 3
+      优: 2
+    expected_fuzzy_score: 0.86
+
+  C5_1:  # 抗毁能力
+    indicator_name: "抗毁能力 (Anti-Destruction Capability)"
+    example_assessment:
+      差: 1
+      中: 1
+      良: 2
+      优: 1
+    expected_fuzzy_score: 0.65
+
+  C5_3:  # 持续作战能力
+    indicator_name: "持续作战能力 (Sustained Operations Capability)"
+    example_assessment:
+      差: 0
+      中: 1
+      良: 3
+      优: 1
+    expected_fuzzy_score: 0.70
+
+validation_rules:
+  membership_sum_tolerance: 0.001  # Allow small numerical errors
+  minimum_experts: 1
+  maximum_experts: 10
+  valid_terms: ["差", "中", "良", "优"]

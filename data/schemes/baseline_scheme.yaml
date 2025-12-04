@@ -1,0 +1,73 @@
+# Combat System Configuration: Baseline Scheme
+# Standard force structure for reference comparison
+
+scheme_id: "baseline_scheme"
+scheme_name: "Baseline Force Structure"
+description: "Standard balanced force structure with mixed platform capabilities"
+created_by: "systems_analyst"
+creation_date: "2025-10-25"
+scenario_context: "Strait control with moderate threat level"
+
+# Platform Inventory
+platform_inventory:
+  USV_Unmanned_Surface_Vessel:
+    count: 8
+    types:
+      patrol_usv: 5
+      surveillance_usv: 3
+
+  UUV_Unmanned_Underwater_Vessel:
+    count: 4
+    types:
+      attack_uuv: 2
+      reconnaissance_uuv: 2
+
+# Deployment Plan
+deployment_plan:
+  primary_sector:
+    coordinates: [25.0, 121.0]  # Latitude, Longitude
+    radius_km: 50
+
+  secondary_sectors:
+    - coordinates: [24.5, 121.5]
+      radius_km: 30
+    - coordinates: [25.5, 120.5]
+      radius_km: 30
+
+# Task Assignments
+task_assignments:
+  surveillance_patrol:
+    assigned_platforms: 4
+    platform_types: ["patrol_usv", "surveillance_usv"]
+    priority: "high"
+
+  anti_submarine_warfare:
+    assigned_platforms: 3
+    platform_types: ["attack_uuv", "reconnaissance_uuv"]
+    priority: "medium"
+
+  mine_countermeasures:
+    assigned_platforms: 3
+    platform_types: ["patrol_usv", "reconnaissance_uuv"]
+    priority: "medium"
+
+  area_denial:
+    assigned_platforms: 2
+    platform_types: ["attack_uuv"]
+    priority: "low"
+
+# Operational Constraints
+operational_constraints:
+  max_budget_million_usd: 45.0
+  total_platforms: 12
+  deployment_area_km2: 5000
+  endurance_hours: 72
+  communication_range_km: 100
+
+# Simplified Simulation Parameters
+simulation_parameters:
+  detection_range_factor: 1.0  # Baseline multiplier
+  coordination_efficiency: 0.8  # 80% of optimal
+  weapon_effectiveness: 0.85  # 85% of rated performance
+  network_bandwidth_mbps: 100
+  stealth_factor: 0.7  # 70% reduction in detectability

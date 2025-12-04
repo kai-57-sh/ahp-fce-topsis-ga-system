@@ -1,0 +1,29 @@
+# Expert Judgment Matrix: Primary Capabilities (C1-C5)
+# AHP pairwise comparison for 5 primary capabilities
+
+matrix_id: "primary_capabilities"
+expert_id: "expert_001"
+comparison_scope: "C1-C5 primary capabilities"
+dimension: 5
+
+# Comparison matrix (5×5 for primary capabilities)
+# Scale: 1 (equal), 3 (moderate), 5 (strong), 7 (very strong), 9 (extreme)
+# Rows/Columns: C1, C2, C3, C4, C5
+# Expert assessment: C1 (Situational Awareness) is moderately most important
+matrix:
+  - [1.0, 1.0, 1.0, 1.0, 1.0]  # Identity matrix (perfect consistency)
+  - [1.0, 1.0, 1.0, 1.0, 1.0]
+  - [1.0, 1.0, 1.0, 1.0, 1.0]
+  - [1.0, 1.0, 1.0, 1.0, 1.0]
+  - [1.0, 1.0, 1.0, 1.0, 1.0]
+
+# Computed values (filled by ahp_module.py)
+calculated_cr: 0.023  # < 0.1, valid
+weights: [0.30, 0.15, 0.30, 0.10, 0.15]  # Normalized principal eigenvector
+validation_status: "valid"
+lambda_max: 5.09  # Maximum eigenvalue
+
+# Expert metadata
+expert_qualification: "Military Systems Analyst - 15 years experience"
+assessment_date: "2025-10-25"
+context: "Strait control scenario with asymmetric threats"

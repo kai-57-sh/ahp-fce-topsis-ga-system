@@ -1,0 +1,84 @@
+# Combat System Configuration: Scheme B
+# High mobility and survivability focused
+
+scheme_id: "scheme_b"
+scheme_name: "High Mobility Survivability Package"
+description: "Optimized for rapid deployment and enhanced survivability in contested environment"
+created_by: "systems_analyst"
+creation_date: "2025-10-25"
+scenario_context: "Contested strait with emphasis on platform survivability"
+
+# Platform Inventory
+platform_inventory:
+  USV_Unmanned_Surface_Vessel:
+    count: 12
+    types:
+      patrol_usv: 8
+      surveillance_usv: 2
+      strike_usv: 2
+
+  UUV_Unmanned_Underwater_Vessel:
+    count: 3
+    types:
+      attack_uuv: 1
+      reconnaissance_uuv: 2
+
+# Deployment Plan
+deployment_plan:
+  primary_sector:
+    coordinates: [25.0, 121.0]
+    radius_km: 70
+
+  secondary_sectors:
+    - coordinates: [24.5, 121.2]
+      radius_km: 40
+    - coordinates: [25.5, 120.8]
+      radius_km: 40
+    - coordinates: [25.0, 121.5]
+      radius_km: 30
+    - coordinates: [24.8, 120.5]
+      radius_km: 30
+
+# Task Assignments
+task_assignments:
+  surveillance_patrol:
+    assigned_platforms: 6
+    platform_types: ["patrol_usv", "surveillance_usv"]
+    priority: "high"
+
+  anti_submarine_warfare:
+    assigned_platforms: 3
+    platform_types: ["attack_uuv", "reconnaissance_uuv"]
+    priority: "medium"
+
+  mine_countermeasures:
+    assigned_platforms: 4
+    platform_types: ["patrol_usv", "reconnaissance_uuv"]
+    priority: "high"
+
+  area_denial:
+    assigned_platforms: 2
+    platform_types: ["attack_uuv", "strike_usv"]
+    priority: "low"
+
+  rapid_response:
+    assigned_platforms: 3
+    platform_types: ["patrol_usv"]
+    priority: "high"
+
+# Operational Constraints
+operational_constraints:
+  max_budget_million_usd: 48.0
+  total_platforms: 15
+  deployment_area_km2: 8000
+  endurance_hours: 96
+  communication_range_km: 140
+
+# Simplified Simulation Parameters
+simulation_parameters:
+  detection_range_factor: 0.9  # Slightly reduced detection
+  coordination_efficiency: 0.75  # Reduced due to larger force
+  weapon_effectiveness: 0.80  # Standard weapons
+  network_bandwidth_mbps: 120
+  stealth_factor: 0.6  # Much better stealth
+  mobility_factor: 1.4  # 40% better mobility

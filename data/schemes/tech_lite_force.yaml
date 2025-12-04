@@ -1,0 +1,174 @@
+# Technology-Lite Force Configuration
+# Cost-effective solution with modern capabilities but reduced platform count
+
+scheme_id: "tech_lite_force"
+scheme_name: "Technology-Lite Affordable Force"
+scheme_description: "Cost-effective configuration leveraging advanced technology with reduced platform inventory"
+
+command_authority: "ECONOMIC FORCES COMMAND"
+geographic_scope: "CLOSED LITTORAL AREA"
+threat_level: "LOW"
+mission_type: "COST-EFFECTIVE DEFENSE"
+
+platform_inventory:
+  USV_Unmanned_Surface_Vessel:
+    count: 8
+    types:
+      multirole_usv: 4
+      surveillance_usv: 2
+      support_usv: 2
+
+  UAV_Unmanned_Aerial_Vehicle:
+    count: 6
+    types:
+      multirole_uav: 3
+      surveillance_uav: 2
+      transport_uav: 1
+
+  UUV_Unmanned_Underwater_Vessel:
+    count: 4
+    types:
+      multirole_uuv: 2
+      surveillance_uuv: 1
+      support_uuv: 1
+
+deployment_plan:
+  primary_sector:
+    coordinates: [30.0, -70.0]
+    radius_km: 100
+  secondary_sectors:
+    - coordinates: [30.5, -69.5]
+      radius_km: 75
+
+  patrol_routes:
+    - route_id: "lite_picket"
+      waypoints: [[29.8, -69.8], [30.2, -70.2], [29.8, -69.8]]
+      patrol_type: "circular"
+      asset_assignment: ["multirole_usv_1", "multirole_uav_1"]
+
+task_assignments:
+  surveillance_operations:
+    primary_assets: ["surveillance_usv", "surveillance_uav", "surveillance_uuv"]
+    coverage_requirement: 0.75
+    endurance_hours: 48
+    update_frequency_min: 20
+
+  anti_submarine_warfare:
+    primary_assets: ["multirole_uuv", "multirole_usv"]
+    detection_probability: 0.65
+    patrol_density: 0.40
+    response_time_min: 60
+
+  mine_countermeasures:
+    primary_assets: ["support_usv", "support_uuv"]
+    clearance_rate: 0.30
+    area_coverage_km2: 75
+    safety_radius_km: 2
+
+  command_control:
+    primary_assets: ["multirole_usv", "multirole_uav"]
+    network_redundancy: 2
+    bandwidth_mbps: 25
+    encryption_level: "AES-128"
+
+  logistics_support:
+    primary_assets: ["support_usv", "transport_uav"]
+    resupply_interval_hours: 24
+    fuel_autonomy_days: 3
+    maintenance_spare_capacity: 0.15
+
+operational_constraints:
+  total_platforms: 18
+  max_budget_million_usd: 450
+  deployment_area_km2: 31400
+  endurance_hours: 72
+  communication_range_km: 100
+  risk_tolerance: "MODERATE"
+  rules_of_engagement: "SELF_DEFENSE_ONLY"
+  weather_limitations:
+    max_wind_speed_knots: 20
+    max_wave_height_m: 2.5
+    min_visibility_km: 8
+
+capability_priorities:
+  C1_Situational_Awareness: 0.35
+  C2_Anti_Submarine_Warfare: 0.20
+  C3_Mine_Countermeasures: 0.15
+  C4_Command_Control: 0.15
+  C5_Logistics_Sustainment: 0.15
+
+expert_assessments:
+  C1_1_Detection_Range:
+    linguistic_term: "中"
+    confidence: 0.75
+    justification: "Moderate detection with cost-effective sensors"
+
+  C1_2_Coverage_Area:
+    linguistic_term: "中"
+    confidence: 0.70
+    justification: "Moderate coverage with limited platforms"
+
+  C1_3_Target_Classification:
+    linguistic_term: "良"
+    confidence: 0.80
+    justification: "Good classification using advanced AI algorithms"
+
+  C2_1_Detection_Probability:
+    linguistic_term: "中"
+    confidence: 0.65
+    justification: "Moderate detection with limited ASW assets"
+
+  C2_2_Tracking_Accuracy:
+    linguistic_term: "中"
+    confidence: 0.60
+    justification: "Moderate tracking with sensor limitations"
+
+  C2_3_Engagement_Range:
+    linguistic_term: "差"
+    confidence: 0.55
+    justification: "Poor engagement range due to limited assets"
+
+  C3_1_Detection_Rate:
+    linguistic_term: "中"
+    confidence: 0.70
+    justification: "Moderate mine detection with basic sonar"
+
+  C3_2_Clearance_Speed:
+    linguistic_term: "差"
+    confidence: 0.50
+    justification: "Poor clearance speed with minimal assets"
+
+  C3_3_Safety_Margin:
+    linguistic_term: "良"
+    confidence: 0.85
+    justification: "Good safety with conservative procedures"
+
+  C4_1_Network_Reliability:
+    linguistic_term: "中"
+    confidence: 0.70
+    justification: "Moderate network with limited redundancy"
+
+  C4_2_Command_Lag:
+    linguistic_term: "良"
+    confidence: 0.75
+    justification: "Good command with optimized protocols"
+
+  C4_3_Cyber_Resilience:
+    linguistic_term: "中"
+    confidence: 0.65
+    justification: "Moderate cyber protection with basic encryption"
+
+  C5_1_Supply_Efficiency:
+    linguistic_term: "中"
+    confidence: 0.70
+    justification: "Moderate supply efficiency with limited logistics"
+
+  C5_2_Maintenance_Ratio:
+    linguistic_term: "中"
+    confidence: 0.75
+    justification: "Moderate maintenance with limited spare capacity"
+
+  C5_3_Endurance:
+    linguistic_term: "差"
+    confidence: 0.60
+    justification: "Poor endurance due to limited fuel capacity"

@@ -1,0 +1,198 @@
+# Indicator Hierarchy Configuration
+# AHP-FCE-TOPSIS-GA Evaluation System
+
+# Primary Capabilities (5 capabilities)
+# 基于无人作战体系效能评估一级指标体系的设定
+primary_capabilities:
+  C1:
+    name: "态势感知能力 (Situational Awareness Capability)"
+    description: "作战体系的'眼睛'和'前脑'，衡量体系对战场环境中的目标、威胁及自身状态进行探测、识别、融合、理解并形成统一战场态势图景的综合能力"
+    weight: 0.25
+    literature_reference: "Alberts et al., 2000, Network Centric Warfare; Boyd, 1987, OODA Loop Theory; 吴汉荣 et al., 2007; 李大鹏 et al., 2012"
+
+  C2:
+    name: "指挥决策能力 (Command & Decision Capability)"
+    description: "作战体系的'神经中枢'，衡量体系在理解战场态势后，进行自主或半自主的任务规划、威胁评估、火力分配、行动协同并生成具体指令的效率与质量"
+    weight: 0.20
+    literature_reference: "Alberts et al., 2000, C4ISR Framework; Boyd, 1987, OODA Loop; 吴汉荣 et al., 2007; 李大鹏 et al., 2012"
+
+  C3:
+    name: "行动打击能力 (Action & Strike Capability)"
+    description: "作战体系'拳头'的最终体现，衡量体系在接收指令后，机动、占位并运用火力或电子战等非火力手段，对目标实施精确、有效打击的综合能力"
+    weight: 0.25
+    literature_reference: "Boyd, 1987, OODA Loop Theory; 吴汉荣 et al., 2007; 费继番 et al., 2016"
+
+  C4:
+    name: "网络通联能力 (Network & Communication Capability)"
+    description: "作战体系的'血脉'，是实现态势感知、指挥决策和行动打击能力的基础支撑，衡量体系内部各节点之间进行信息安全、可靠、实时交互的能力"
+    weight: 0.15
+    literature_reference: "Alberts et al., 2000, Network Centric Warfare; 李大鹏 et al., 2012"
+
+  C5:
+    name: "体系生存能力 (System Survivability Capability)"
+    description: "作战体系在复杂对抗环境下的'金钟罩'，衡量体系在遭受敌方攻击或内部故障时的鲁棒性、损伤容忍度、任务恢复效率和持续作战能力"
+    weight: 0.15
+    literature_reference: "费继番 et al., 2016; 韩春 et al., 2012"
+
+# Secondary Indicators (15 indicators - 3 per primary capability)
+secondary_indicators:
+  # C1: 态势感知能力 (Situational Awareness Capability)
+  C1_1:
+    name: "侦察探测能力 (Reconnaissance & Detection Capability)"
+    description: "对战场环境中目标、威胁进行全方位探测和识别的能力"
+    primary_capability: "C1"
+    unit: "capability_score"
+    type: "benefit"  # Higher is better
+    fuzzy_evaluation: true
+    weight: 0.08
+    literature_reference: "Alberts et al., 2000; ISR Performance Standards 2020"
+
+  C1_2:
+    name: "信息融合能力 (Information Fusion Capability)"
+    description: "将多源信息进行融合处理，形成统一战场态势图景的能力"
+    primary_capability: "C1"
+    unit: "fusion_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.09
+    literature_reference: "Data Fusion Engineering Handbook 2019; 多源信息融合理论"
+
+  C1_3:
+    name: "态势理解能力 (Situation Understanding Capability)"
+    description: "对战场态势进行深度理解、分析和预测的综合能力"
+    primary_capability: "C1"
+    unit: "understanding_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.08
+    literature_reference: "Boyd 1987; 认知科学在军事态势理解中的应用"
+
+  # C2: 指挥决策能力 (Command & Decision Capability)
+  C2_1:
+    name: "任务规划能力 (Mission Planning Capability)"
+    description: "进行自主或半自主任务规划和方案制定的效率与质量"
+    primary_capability: "C2"
+    unit: "planning_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.07
+    literature_reference: "C4ISR Planning Theory 2019; 智能任务规划系统"
+
+  C2_2:
+    name: "威胁评估能力 (Threat Assessment Capability)"
+    description: "对战场威胁进行识别、分析和优先级排序的能力"
+    primary_capability: "C2"
+    unit: "assessment_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.07
+    literature_reference: "Threat Assessment Methodologies 2020; 军事威胁评估理论"
+
+  C2_3:
+    name: "决策响应能力 (Decision Response Capability)"
+    description: "从态势理解到决策制定的时间效率和决策质量"
+    primary_capability: "C2"
+    unit: "response_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.06
+    literature_reference: "Boyd 1987; 实时决策支持系统"
+
+  # C3: 行动打击能力 (Action & Strike Capability)
+  C3_1:
+    name: "火力打击能力 (Fire Strike Capability)"
+    description: "运用火力手段对目标实施精确、有效打击的综合能力"
+    primary_capability: "C3"
+    unit: "strike_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.08
+    literature_reference: "Precision Strike Guidelines 2020; 精确打击理论"
+
+  C3_2:
+    name: "机动占位能力 (Maneuver & Positioning Capability)"
+    description: "接收指令后快速机动、占位并形成有效作战态势的能力"
+    primary_capability: "C3"
+    unit: "maneuver_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.09
+    literature_reference: "Military Maneuver Theory 2019; 机动作战理论"
+
+  C3_3:
+    name: "电子对抗能力 (Electronic Warfare Capability)"
+    description: "运用电子战等非火力手段对目标进行压制和干扰的能力"
+    primary_capability: "C3"
+    unit: "ew_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.08
+    literature_reference: "Electronic Warfare Doctrine 2021; 电子战作战理论"
+
+  # C4: 网络通联能力 (Network & Communication Capability)
+  C4_1:
+    name: "信息传输能力 (Information Transmission Capability)"
+    description: "体系内部各节点间信息传输的带宽和效率"
+    primary_capability: "C4"
+    unit: "transmission_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.05
+    literature_reference: "Network Communications Standards 2020; 李大鹏 et al., 2012"
+
+  C4_2:
+    name: "网络可靠性 (Network Reliability)"
+    description: "通信网络的安全可靠性及抗干扰能力"
+    primary_capability: "C4"
+    unit: "reliability_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.05
+    literature_reference: "Network Reliability Engineering 2019; 网络可靠性理论"
+
+  C4_3:
+    name: "协同作战能力 (Collaborative Operations Capability)"
+    description: "多平台间协同作战和信息共享的综合能力"
+    primary_capability: "C4"
+    unit: "collaboration_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.05
+    literature_reference: "Collaborative Engagement Theory 2021; 协同作战理论"
+
+  # C5: 体系生存能力 (System Survivability Capability)
+  C5_1:
+    name: "抗毁能力 (Anti-Destruction Capability)"
+    description: "体系在遭受攻击时的损伤容忍度和鲁棒性"
+    primary_capability: "C5"
+    unit: "survivability_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.05
+    literature_reference: "费继番 et al., 2016; 韩春 et al., 2012"
+
+  C5_2:
+    name: "任务恢复能力 (Mission Recovery Capability)"
+    description: "体系受损后恢复任务执行的能力和效率"
+    primary_capability: "C5"
+    unit: "recovery_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.05
+    literature_reference: "System Recovery Theory 2020; 系统恢复与重构理论"
+
+  C5_3:
+    name: "持续作战能力 (Sustained Operations Capability)"
+    description: "体系在长期作战中的持续作战能力和韧性"
+    primary_capability: "C5"
+    unit: "endurance_score"
+    type: "benefit"
+    fuzzy_evaluation: true
+    weight: 0.05
+    literature_reference: "Sustained Operations Doctrine 2021; 持续作战能力理论"
+
+# Total weights should sum to 1.0 for both primary and secondary indicators
+validation:
+  primary_weight_sum: 1.0
+  secondary_weight_sum: 1.0
+  fuzzy_indicators_count: 15  # All indicators use fuzzy evaluation for qualitative assessment

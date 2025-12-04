@@ -1,0 +1,27 @@
+# Expert Judgment Matrix: C1 Secondary Indicators
+# AHP pairwise comparison for C1 Situational Awareness indicators
+
+matrix_id: "c1_secondary_indicators"
+expert_id: "expert_001"
+primary_capability: "C1"
+comparison_scope: "C1_1, C1_2, C1_3 - Situational Awareness indicators"
+dimension: 3
+
+# Comparison matrix (3×3 for C1 secondary indicators)
+# Rows/Columns: C1_1, C1_2, C1_3
+matrix:
+  - [1.0, 1.0, 1.0]  # C1_1 vs all (侦察探测能力 vs others)
+  - [1.0, 1.0, 1.0]  # C1_2 vs all (信息融合能力 vs others)
+  - [1.0, 1.0, 1.0]  # C1_3 vs all (态势理解能力 vs others)
+
+# Computed values (filled by ahp_module.py)
+calculated_cr: 0.0  # Perfectly consistent
+weights: [0.333, 0.333, 0.334]  # Normalized principal eigenvector (相对权重)
+# 对应配置文件权重: [0.08, 0.09, 0.08]，总和0.25
+validation_status: "valid"
+lambda_max: 3.0  # Maximum eigenvalue
+
+# Expert metadata
+expert_qualification: "Sensor Systems Specialist"
+assessment_date: "2025-10-25"
+context: "Naval surveillance in littoral environment"

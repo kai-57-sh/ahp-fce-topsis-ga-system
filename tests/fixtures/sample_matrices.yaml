@@ -1,0 +1,60 @@
+# Sample AHP Matrices for Testing
+# This file contains valid and invalid matrices for unit testing
+
+valid_matrix_3x3:
+  matrix_id: "test_valid_3x3"
+  description: "Valid 3x3 matrix with perfect consistency"
+  matrix:
+    - [1.0, 2.0, 3.0]
+    - [0.5, 1.0, 1.5]
+    - [0.3333333333, 0.6666666667, 1.0]
+  expected_cr: 0.0
+  expected_weights: [0.539, 0.297, 0.164]
+
+valid_matrix_5x5:
+  matrix_id: "test_valid_5x5"
+  description: "Valid 5x5 matrix with acceptable consistency"
+  matrix:
+    - [1.0, 2.0, 3.0, 4.0, 5.0]
+    - [0.5, 1.0, 1.5, 2.0, 2.5]
+    - [0.333, 0.667, 1.0, 1.333, 1.667]
+    - [0.25, 0.5, 0.75, 1.0, 1.25]
+    - [0.2, 0.4, 0.6, 0.8, 1.0]
+  expected_cr: 0.0
+  expected_weights: [0.419, 0.209, 0.140, 0.105, 0.127]
+
+invalid_matrix_inconsistent:
+  matrix_id: "test_inconsistent"
+  description: "Invalid matrix with poor consistency (CR > 0.1)"
+  matrix:
+    - [1.0, 5.0, 9.0]
+    - [0.2, 1.0, 3.0]
+    - [0.111, 0.333, 1.0]
+  expected_cr: 0.13  # This should fail consistency check
+  should_fail: true
+
+invalid_matrix_not_square:
+  matrix_id: "test_not_square"
+  description: "Invalid non-square matrix"
+  matrix:
+    - [1.0, 2.0, 3.0]
+    - [0.5, 1.0, 1.5]
+  should_fail: true
+
+invalid_matrix_no_reciprocal:
+  matrix_id: "test_no_reciprocal"
+  description: "Invalid matrix violating reciprocal property"
+  matrix:
+    - [1.0, 2.0, 3.0]
+    - [0.6, 1.0, 1.5]  # 0.6 ≠ 1/2.0
+    - [0.333, 0.667, 1.0]
+  should_fail: true
+
+invalid_matrix_wrong_diagonal:
+  matrix_id: "test_wrong_diagonal"
+  description: "Invalid matrix with non-unit diagonal elements"
+  matrix:
+    - [1.2, 2.0, 3.0]
+    - [0.5, 0.8, 1.5]
+    - [0.333, 0.667, 1.1]
+  should_fail: true

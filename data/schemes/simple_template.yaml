@@ -1,0 +1,139 @@
+# =============================================================================
+# 简化版无人作战体系配置方案模版
+# =============================================================================
+# 适用于快速方案设计和基础评估场景
+
+# 基本方案信息
+scheme_id: "simple_template"                      # 方案唯一标识
+scheme_name: "简化配置方案模版"                    # 方案名称
+description: "适用于快速评估的简化配置方案"        # 方案描述
+
+# 平台编成（按需调整数量）
+platform_inventory:
+  USV_Unmanned_Surface_Vessel:                    # 无人水面舰艇
+    count: 8                                       # 总数
+    types:
+      patrol_usv: 4                                # 巡逻型
+      surveillance_usv: 3                          # 侦察型
+      strike_usv: 1                                # 打击型
+
+  UUV_Unmanned_Underwater_Vessel:                  # 无人水下航行器
+    count: 4                                       # 总数
+    types:
+      surveillance_uuv: 2                          # 侦察型
+      attack_uuv: 2                                # 攻击型
+
+# 部署区域（坐标格式：[纬度, 经度]）
+deployment_plan:
+  primary_sector:
+    coordinates: [25.0, 121.0]                     # 主要区域中心
+    radius_km: 50                                  # 区域半径
+
+# 主要任务配置
+task_assignments:
+  surveillance_patrol:                             # 侦察巡逻
+    assigned_platforms: 4                          # 分配平台数
+    platform_types: ["patrol_usv", "surveillance_usv"]
+    priority: "high"                               # 优先级
+
+  anti_submarine_warfare:                          # 反潜作战
+    assigned_platforms: 3
+    platform_types: ["attack_uuv", "surveillance_uuv"]
+    priority: "medium"
+
+  area_denial:                                     # 区域拒止
+    assigned_platforms: 2
+    platform_types: ["strike_usv"]
+    priority: "medium"
+
+# 作战约束
+operational_constraints:
+  max_budget_million_usd: 50.0                     # 预算限制
+  total_platforms: 12                              # 平台总数
+  deployment_area_km2: 5000                        # 部署面积
+  endurance_hours: 72                              # 持续时间
+
+# 能力权重（总和应为1.0）
+capability_priorities:
+  C1_Situational_Awareness: 0.30                   # 态势感知
+  C2_Command_Decision: 0.20                        # 指挥决策
+  C3_Action_Strike: 0.20                           # 行动打击
+  C4_Network_Communication: 0.15                   # 网络通联
+  C5_System_Survivability: 0.15                    # 体系生存
+
+# 专家评估（可选项：差/中/良/优）
+# 注意：当前系统使用均匀权重矩阵，各项指标权重相等
+# 用户可根据实际需求修改 linguistic_term 和 confidence 值
+expert_assessments:
+  C1_1_Reconnaissance_Detection:                   # 侦察探测
+    linguistic_term: "良"                          # 评估等级：差/中/良/优
+    confidence: 0.80                               # 评估置信度（0.0-1.0）
+
+  C1_2_Information_Fusion:                        # 信息融合
+    linguistic_term: "中"
+    confidence: 0.75
+
+  C1_3_Situation_Understanding:                   # 态势理解
+    linguistic_term: "中"
+    confidence: 0.70
+
+  C2_1_Mission_Planning:                          # 任务规划
+    linguistic_term: "良"
+    confidence: 0.80
+
+  C2_2_Threat_Assessment:                         # 威胁评估
+    linguistic_term: "中"
+    confidence: 0.75
+
+  C2_3_Decision_Response:                         # 决策响应
+    linguistic_term: "良"
+    confidence: 0.80
+
+  C3_1_Fire_Strike:                               # 火力打击
+    linguistic_term: "良"
+    confidence: 0.85
+
+  C3_2_Maneuver_Positioning:                      # 机动占位
+    linguistic_term: "中"
+    confidence: 0.70
+
+  C3_3_Electronic_Warfare:                        # 电子对抗
+    linguistic_term: "中"
+    confidence: 0.75
+
+  C4_1_Information_Transmission:                  # 信息传输
+    linguistic_term: "良"
+    confidence: 0.80
+
+  C4_2_Network_Reliability:                       # 网络可靠性
+    linguistic_term: "良"
+    confidence: 0.85
+
+  C4_3_Collaborative_Operations:                  # 协同作战
+    linguistic_term: "中"
+    confidence: 0.75
+
+  C5_1_Anti_Destruction:                          # 抗毁能力
+    linguistic_term: "良"
+    confidence: 0.80
+
+  C5_2_Mission_Recovery:                          # 任务恢复
+    linguistic_term: "良"
+    confidence: 0.85
+
+  C5_3_Sustained_Operations:                      # 持续作战
+    linguistic_term: "良"
+    confidence: 0.80
+
+# 仿真参数
+simulation_parameters:
+  detection_range_factor: 1.0                      # 探测能力因子
+  coordination_efficiency: 0.8                     # 协调效率
+  weapon_effectiveness: 0.85                       # 武器效能
+
+# 使用方法：
+# 1. 修改scheme_id为你的方案名称
+# 2. 调整平台数量和类型
+# 3. 设置部署区域坐标
+# 4. 配置任务分配
+# 5. 运行评估：python main.py evaluate --schemes data/schemes/your_scheme.yaml

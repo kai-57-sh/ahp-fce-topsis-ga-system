@@ -1,0 +1,183 @@
+# High Endurance Force Configuration
+# Extended operations capability with optimized sustainment
+
+scheme_id: "high_endurance_force"
+scheme_name: "High Endurance Sustained Force"
+scheme_description: "Extended duration operations with superior logistics and sustainment capabilities"
+
+command_authority: "SUSTAINMENT COMMAND"
+geographic_scope: "DEEP WATER OPERATIONS"
+threat_level: "LOW TO MODERATE"
+mission_type: "SUSTAINED PRESENCE"
+
+platform_inventory:
+  USV_Unmanned_Surface_Vessel:
+    count: 16
+    types:
+      endurance_usv: 8
+      surveillance_usv: 4
+      support_usv: 4
+
+  UAV_Unmanned_Aerial_Vehicle:
+    count: 12
+    types:
+      surveillance_uav: 6
+      transport_uav: 4
+      ew_uav: 2
+
+  UUV_Unmanned_Underwater_Vessel:
+    count: 8
+    types:
+      endurance_uuv: 4
+      surveillance_uuv: 2
+      support_uuv: 2
+
+deployment_plan:
+  primary_sector:
+    coordinates: [28.0, -75.0]
+    radius_km: 200
+  secondary_sectors:
+    - coordinates: [27.5, -74.5]
+      radius_km: 150
+    - coordinates: [28.5, -75.5]
+      radius_km: 150
+    - coordinates: [27.0, -76.0]
+      radius_km: 100
+
+  patrol_routes:
+    - route_id: "endurance_picket_1"
+      waypoints: [[27.8, -74.8], [28.2, -75.2], [27.8, -74.8]]
+      patrol_type: "circular"
+      asset_assignment: ["endurance_usv_1", "endurance_usv_2", "surveillance_uav_1"]
+
+    - route_id: "endurance_picket_2"
+      waypoints: [[28.3, -74.7], [28.7, -75.3], [28.3, -74.7]]
+      patrol_type: "figure_8"
+      asset_assignment: ["endurance_usv_3", "endurance_usv_4", "surveillance_uav_2"]
+
+task_assignments:
+  surveillance_operations:
+    primary_assets: ["surveillance_usv", "surveillance_uav", "surveillance_uuv"]
+    coverage_requirement: 0.90
+    endurance_hours: 168  # 1 week
+    update_frequency_min: 30
+
+  anti_submarine_warfare:
+    primary_assets: ["surveillance_uuv", "endurance_usv"]
+    detection_probability: 0.70
+    patrol_density: 0.50
+    response_time_min: 45
+
+  mine_countermeasures:
+    primary_assets: ["support_usv", "support_uuv"]
+    clearance_rate: 0.40
+    area_coverage_km2: 150
+    safety_radius_km: 3
+
+  command_control:
+    primary_assets: ["support_usv", "ew_uav"]
+    network_redundancy: 4
+    bandwidth_mbps: 50
+    encryption_level: "AES-256"
+
+  logistics_support:
+    primary_assets: ["endurance_usv", "transport_uav", "support_uuv"]
+    resupply_interval_hours: 96
+    fuel_autonomy_days: 21
+    maintenance_spare_capacity: 0.35
+
+operational_constraints:
+  total_platforms: 36
+  max_budget_million_usd: 1200
+  deployment_area_km2: 125600
+  endurance_hours: 168
+  communication_range_km: 300
+  risk_tolerance: "LOW"
+  rules_of_engagement: "STAND_AND_DEFEND"
+  weather_limitations:
+    max_wind_speed_knots: 35
+    max_wave_height_m: 4.0
+    min_visibility_km: 3
+
+capability_priorities:
+  C1_Situational_Awareness: 0.25
+  C2_Anti_Submarine_Warfare: 0.15
+  C3_Mine_Countermeasures: 0.15
+  C4_Command_Control: 0.20
+  C5_Logistics_Sustainment: 0.25
+
+expert_assessments:
+  C1_1_Detection_Range:
+    linguistic_term: "良"
+    confidence: 0.80
+    justification: "Good detection with optimized sensor placement"
+
+  C1_2_Coverage_Area:
+    linguistic_term: "优"
+    confidence: 0.90
+    justification: "Excellent coverage with extended endurance platforms"
+
+  C1_3_Target_Classification:
+    linguistic_term: "中"
+    confidence: 0.70
+    justification: "Moderate classification with limited processing"
+
+  C2_1_Detection_Probability:
+    linguistic_term: "中"
+    confidence: 0.70
+    justification: "Moderate ASW detection with reduced asset density"
+
+  C2_2_Tracking_Accuracy:
+    linguistic_term: "中"
+    confidence: 0.65
+    justification: "Moderate tracking with dispersed assets"
+
+  C2_3_Engagement_Range:
+    linguistic_term: "中"
+    confidence: 0.70
+    justification: "Moderate range for defensive posture"
+
+  C3_1_Detection_Rate:
+    linguistic_term: "中"
+    confidence: 0.75
+    justification: "Moderate mine detection with limited assets"
+
+  C3_2_Clearance_Speed:
+    linguistic_term: "差"
+    confidence: 0.60
+    justification: "Poor clearance speed due to limited MCM assets"
+
+  C3_3_Safety_Margin:
+    linguistic_term: "优"
+    confidence: 0.95
+    justification: "Excellent safety with conservative operations"
+
+  C4_1_Network_Reliability:
+    linguistic_term: "优"
+    confidence: 0.90
+    justification: "Excellent network with robust redundancy"
+
+  C4_2_Command_Lag:
+    linguistic_term: "良"
+    confidence: 0.80
+    justification: "Good command despite extended ranges"
+
+  C4_3_Cyber_Resilience:
+    linguistic_term: "良"
+    confidence: 0.85
+    justification: "Good cyber protection with extended protocols"
+
+  C5_1_Supply_Efficiency:
+    linguistic_term: "优"
+    confidence: 0.95
+    justification: "Excellent supply chain with autonomous systems"
+
+  C5_2_Maintenance_Ratio:
+    linguistic_term: "优"
+    confidence: 0.90
+    justification: "Excellent maintenance with high spare capacity"
+
+  C5_3_Endurance:
+    linguistic_term: "优"
+    confidence: 0.95
+    justification: "Superior endurance with optimized consumption"

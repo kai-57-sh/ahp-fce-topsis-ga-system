@@ -1,0 +1,262 @@
+# =============================================================================
+# 无人作战体系配置方案模版文件
+# =============================================================================
+# 本文件为无人作战体系效能评估系统的标准配置方案模版
+# 包含完整的平台配置、部署计划、任务分配和专家评估等所有必要信息
+# 用户可根据具体作战需求修改相应配置项
+# =============================================================================
+
+# ================================
+# 方案基本信息
+# ================================
+scheme_id: "template_scheme"                    # 方案唯一标识符（建议使用英文，便于程序处理）
+scheme_name: "标准配置方案模版"                  # 方案显示名称（可使用中文，便于用户识别）
+scheme_description: "基于标准作战需求设计的通用无人作战体系配置方案，可作为其他方案的设计基础"  # 方案详细描述
+created_by: "system_administrator"               # 创建者标识
+creation_date: "2025-10-25"                     # 创建日期（YYYY-MM-DD格式）
+scenario_context: "标准作战环境，中等威胁等级"   # 适用场景描述
+
+# ================================
+# 指挥与作战背景信息
+# ================================
+command_authority: "联合部队司令部"               # 指挥机构名称
+geographic_scope: "沿海作战区域"                   # 地理作战范围
+threat_level: "中等"                              # 威胁等级：低/中等/高/极高
+mission_type: "多域防御作战"                      # 任务类型描述
+
+# ================================
+# 平台编成配置 (Platform Inventory)
+# ================================
+# 说明：配置各类无人平台的数量和类型分布
+# 总数量将直接影响作战能力和预算需求
+platform_inventory:
+  USV_Unmanned_Surface_Vessel:                    # 无人水面舰艇
+    count: 10                                      # 平台总数
+    types:
+      patrol_usv: 4                                # 巡逻型USV数量
+      surveillance_usv: 3                          # 侦察型USV数量
+      strike_usv: 2                                # 打击型USV数量
+      mine_hunting_usv: 1                          # 反水雷USV数量
+
+  UAV_Unmanned_Aerial_Vehicle:                     # 无人航空器
+    count: 8                                       # 平台总数
+    types:
+      surveillance_uav: 4                          # 侦察型UAV数量
+      attack_uav: 2                                # 攻击型UAV数量
+      ew_uav: 2                                    # 电子战UAV数量
+
+  UUV_Unmanned_Underwater_Vessel:                  # 无人水下航行器
+    count: 6                                       # 平台总数
+    types:
+      surveillance_uuv: 3                          # 侦察型UUV数量
+      attack_uuv: 2                                # 攻击型UUV数量
+      mine_hunting_uuv: 1                          # 反水雷UUV数量
+
+# ================================
+# 部署计划 (Deployment Plan)
+# ================================
+# 说明：定义作战区域的地理坐标、巡逻路线和平台部署位置
+# 坐标格式：[纬度, 经度]，范围通常在[-90, 90]和[-180, 180]之间
+deployment_plan:
+  primary_sector:                                  # 主要作战区域
+    coordinates: [25.5, -80.5]                     # 区域中心坐标 [纬度, 经度]
+    radius_km: 150                                 # 区域半径（公里）
+
+  secondary_sectors:                               # 次要作战区域（可配置多个）
+    - coordinates: [26.0, -80.0]                   # 第一个次要区域
+      radius_km: 100                               # 区域半径
+    - coordinates: [25.0, -81.0]                   # 第二个次要区域
+      radius_km: 100                               # 区域半径
+
+  patrol_routes:                                   # 巡逻路线配置
+    - route_id: "alpha_picket"                     # 路线唯一标识
+      waypoints: [[25.3, -80.3], [25.7, -80.7], [25.3, -80.3]]  # 路径点坐标列表
+      patrol_type: "circular"                      # 巡逻类型：circular/figure_8/random
+      asset_assignment: ["USV_1", "USV_2", "UAV_1"] # 分配到此路线的平台
+
+    - route_id: "bravo_picket"                     # 第二条巡逻路线
+      waypoints: [[25.8, -80.2], [26.2, -80.8], [25.8, -80.2]]
+      patrol_type: "figure_8"                      # 巡逻类型
+      asset_assignment: ["USV_3", "USV_4", "UAV_2"] # 分配平台
+
+# ================================
+# 任务分配配置 (Task Assignments)
+# ================================
+# 说明：定义各项作战任务的资源配置、性能要求和优先级
+task_assignments:
+  surveillance_operations:                         # 态势感知任务
+    primary_assets: ["surveillance_usv", "surveillance_uav", "surveillance_uuv"]  # 主要执行平台
+    coverage_requirement: 0.85                     # 覆盖率要求（0.0-1.0）
+    endurance_hours: 72                            # 持续作战时间要求（小时）
+    update_frequency_min: 15                       # 信息更新频率（分钟）
+    priority: "high"                               # 任务优先级：low/medium/high/critical
+
+  anti_submarine_warfare:                          # 反潜作战任务
+    primary_assets: ["mine_hunting_usv", "surveillance_uuv"]  # 主要执行平台
+    detection_probability: 0.75                    # 探测概率要求（0.0-1.0）
+    patrol_density: 0.60                           # 巡逻密度（0.0-1.0）
+    response_time_min: 30                          # 响应时间要求（分钟）
+    priority: "medium"                             # 任务优先级
+
+  mine_countermeasures:                            # 反水雷任务
+    primary_assets: ["mine_hunting_usv", "mine_hunting_uuv"]  # 主要执行平台
+    clearance_rate: 0.50                           # 清障速率要求（0.0-1.0）
+    area_coverage_km2: 200                         # 覆盖区域要求（平方公里）
+    safety_radius_km: 2                            # 安全半径（公里）
+    priority: "medium"                             # 任务优先级
+
+  command_control:                                 # 指挥控制任务
+    primary_assets: ["strike_usv", "ew_uav"]       # 主要执行平台
+    network_redundancy: 3                          # 网络冗余度
+    bandwidth_mbps: 100                            # 带宽要求（Mbps）
+    encryption_level: "AES-256"                    # 加密等级
+    priority: "critical"                           # 任务优先级
+
+  logistics_support:                               # 后勤保障任务
+    primary_assets: ["USV_Unmanned_Surface_Vessel"]  # 主要执行平台
+    resupply_interval_hours: 48                    # 补给间隔（小时）
+    fuel_autonomy_days: 7                          # 燃料自持力（天）
+    maintenance_spare_capacity: 0.20               # 维修备件容量比例
+    priority: "medium"                             # 任务优先级
+
+# ================================
+# 作战约束条件 (Operational Constraints)
+# ================================
+# 说明：定义方案实施的各种限制条件和约束参数
+operational_constraints:
+  total_platforms: 24                              # 平台总数限制
+  max_budget_million_usd: 800.0                    # 最大预算限制（百万美元）
+  deployment_area_km2: 70650                       # 部署区域面积（平方公里）
+  endurance_hours: 96                              # 最大持续作战时间（小时）
+  communication_range_km: 200                      # 通信距离（公里）
+  risk_tolerance: "MODERATE"                       # 风险承受等级：LOW/MODERATE/HIGH/CRITICAL
+  rules_of_engagement: "SELF_DEFENSE_ONLY"         # 交战规则
+  weather_limitations:                             # 天气限制条件
+    max_wind_speed_knots: 25                       # 最大风速（节）
+    max_wave_height_m: 3.0                         # 最大浪高（米）
+    min_visibility_km: 5                           # 最小能见度（公里）
+
+# ================================
+# 能力优先级权重 (Capability Priorities)
+# ================================
+# 说明：根据作战需求设置各项能力的重要性权重
+# 权重总和应等于1.0，可根据任务重点进行调整
+capability_priorities:
+  C1_Situational_Awareness: 0.30                   # C1态势感知能力权重
+  C2_Command_Decision: 0.20                        # C2指挥决策能力权重
+  C3_Action_Strike: 0.20                           # C3行动打击能力权重
+  C4_Network_Communication: 0.15                   # C4网络通联能力权重
+  C5_System_Survivability: 0.15                    # C5体系生存能力权重
+
+# ================================
+# 专家评估数据 (Expert Assessments)
+# ================================
+# 说明：基于专家经验对各项二级指标进行定性评估
+# linguistic_term可选项：差/中/良/优（对应模糊评价集）
+# confidence为评估置信度（0.0-1.0）
+expert_assessments:
+  # C1: 态势感知能力评估
+  C1_1_Reconnaissance_Detection:                   # C1_1 侦察探测能力
+    linguistic_term: "良"                          # 评估等级：差/中/良/优
+    confidence: 0.85                               # 评估置信度
+    justification: "现代传感器套件提供良好探测距离"  # 评估理由
+
+  C1_2_Information_Fusion:                        # C1_2 信息融合能力
+    linguistic_term: "良"                          # 评估等级
+    confidence: 0.80                               # 置信度
+    justification: "多域资产协同提供充分覆盖"      # 理由
+
+  C1_3_Situation_Understanding:                   # C1_3 态势理解能力
+    linguistic_term: "中"                          # 评估等级
+    confidence: 0.75                               # 置信度
+    justification: "AI处理能力有限，分类能力中等"  # 理由
+
+  # C2: 指挥决策能力评估
+  C2_1_Mission_Planning:                          # C2_1 任务规划能力
+    linguistic_term: "良"                          # 评估等级
+    confidence: 0.80                               # 置信度
+    justification: "多传感器融合提供良好反潜探测"  # 理由
+
+  C2_2_Threat_Assessment:                         # C2_2 威胁评估能力
+    linguistic_term: "中"                          # 评估等级
+    confidence: 0.70                               # 置信度
+    justification: "传感器限制导致跟踪精度中等"    # 理由
+
+  C2_3_Decision_Response:                         # C2_3 决策响应能力
+    linguistic_term: "中"                          # 评估等级
+    confidence: 0.75                               # 置信度
+    justification: "防御作战交战距离中等"          # 理由
+
+  # C3: 行动打击能力评估
+  C3_1_Fire_Strike:                               # C3_1 火力打击能力
+    linguistic_term: "良"                          # 评估等级
+    confidence: 0.85                               # 置信度
+    justification: "先进声纳提供良好水雷探测"      # 理由
+
+  C3_2_Maneuver_Positioning:                      # C3_2 机动占位能力
+    linguistic_term: "中"                          # 评估等级
+    confidence: 0.70                               # 置信度
+    justification: "资产有限导致清障速度中等"      # 理由
+
+  C3_3_Electronic_Warfare:                        # C3_3 电子对抗能力
+    linguistic_term: "优"                          # 评估等级
+    confidence: 0.90                               # 置信度
+    justification: "优秀安全程序和保守方法"        # 理由
+
+  # C4: 网络通联能力评估
+  C4_1_Information_Transmission:                  # C4_1 信息传输能力
+    linguistic_term: "良"                          # 评估等级
+    confidence: 0.85                               # 置信度
+    justification: "多冗余路径提供良好网络连接"    # 理由
+
+  C4_2_Network_Reliability:                       # C4_2 网络可靠性
+    linguistic_term: "良"                          # 评估等级
+    confidence: 0.80                               # 置信度
+    justification: "优化协议提供良好命令响应"      # 理由
+
+  C4_3_Collaborative_Operations:                  # C4_3 协同作战能力
+    linguistic_term: "中"                          # 评估等级
+    confidence: 0.75                               # 置信度
+    justification: "标准军事加密提供中等网络保护"  # 理由
+
+  # C5: 体系生存能力评估
+  C5_1_Anti_Destruction:                          # C5_1 抗毁能力
+    linguistic_term: "良"                          # 评估等级
+    confidence: 0.80                               # 置信度
+    justification: "自主补给能力提供良好后勤"      # 理由
+
+  C5_2_Mission_Recovery:                          # C5_2 任务恢复能力
+    linguistic_term: "良"                          # 评估等级
+    confidence: 0.85                               # 置信度
+    justification: "模块化设计提供良好维护可用性"  # 理由
+
+  C5_3_Sustained_Operations:                      # C5_3 持续作战能力
+    linguistic_term: "良"                          # 评估等级
+    confidence: 0.80                               # 置信度
+    justification: "高效燃油运行提供良好续航能力"  # 理由
+
+# ================================
+# 仿真参数配置 (Simulation Parameters)
+# ================================
+# 说明：用于效能评估计算的仿真参数设置
+# 这些参数将影响最终的评估结果
+simulation_parameters:
+  detection_range_factor: 1.0                      # 探测距离修正因子（基准=1.0）
+  coordination_efficiency: 0.8                     # 协调效率系数（0.0-1.0）
+  weapon_effectiveness: 0.85                       # 武器效能系数（0.0-1.0）
+  network_bandwidth_mbps: 100                      # 网络带宽（Mbps）
+  stealth_factor: 0.7                              # 隐身性能系数（0.0-1.0，越小越隐身）
+  electronic_resistance: 0.8                       # 电子战抗干扰能力（0.0-1.0）
+  maintenance_availability: 0.9                    # 维修可用性（0.0-1.0）
+
+# ================================
+# 使用说明
+# ================================
+# 1. 修改scheme_id为唯一的方案标识符
+# 2. 根据作战需求调整platform_inventory中的平台数量和类型
+# 3. 设置deployment_plan中的地理坐标和巡逻路线
+# 4. 配置task_assignments中的任务参数和优先级
+# 5. 调整expert_assessments中的专家评估数据
+# 6. 检查operational_constraints中的约束条件
+# 7. 运行评估命令：python main.py evaluate --schemes data/schemes/your_scheme.yaml
+# ================================

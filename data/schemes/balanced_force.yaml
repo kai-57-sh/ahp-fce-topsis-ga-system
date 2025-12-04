@@ -1,0 +1,181 @@
+# Balanced Force Configuration
+# Well-rounded multi-domain capability with moderate platform inventory
+
+scheme_id: "balanced_force"
+scheme_name: "Balanced Multi-Domain Force"
+scheme_description: "Balanced configuration providing comprehensive capabilities across all domains with moderate platform numbers"
+
+command_authority: "COMBINED FORCES COMMAND"
+geographic_scope: "LITTORAL OPERATIONS AREA"
+threat_level: "MODERATE"
+mission_type: "MULTI-DOMAIN DEFENSE"
+
+platform_inventory:
+  USV_Unmanned_Surface_Vessel:
+    count: 12
+    types:
+      surveillance_usv: 6
+      strike_usv: 4
+      mine_hunting_usv: 2
+
+  UAV_Unmanned_Aerial_Vehicle:
+    count: 8
+    types:
+      surveillance_uav: 4
+      attack_uav: 2
+      ew_uav: 2
+
+  UUV_Unmanned_Underwater_Vessel:
+    count: 6
+    types:
+      surveillance_uuv: 3
+      mine_hunting_uuv: 2
+      attack_uuv: 1
+
+deployment_plan:
+  primary_sector:
+    coordinates: [25.5, -80.5]
+    radius_km: 150
+  secondary_sectors:
+    - coordinates: [26.0, -80.0]
+      radius_km: 100
+    - coordinates: [25.0, -81.0]
+      radius_km: 100
+
+  patrol_routes:
+    - route_id: "alpha_picket"
+      waypoints: [[25.3, -80.3], [25.7, -80.7], [25.3, -80.3]]
+      patrol_type: "circular"
+      asset_assignment: ["USV_1", "USV_2", "UAV_1"]
+
+    - route_id: "bravo_picket"
+      waypoints: [[25.8, -80.2], [26.2, -80.8], [25.8, -80.2]]
+      patrol_type: "figure_8"
+      asset_assignment: ["USV_3", "USV_4", "UAV_2"]
+
+task_assignments:
+  surveillance_operations:
+    primary_assets: ["surveillance_usv", "surveillance_uav", "surveillance_uuv"]
+    coverage_requirement: 0.85
+    endurance_hours: 72
+    update_frequency_min: 15
+
+  anti_submarine_warfare:
+    primary_assets: ["mine_hunting_usv", "surveillance_uuv"]
+    detection_probability: 0.75
+    patrol_density: 0.60
+    response_time_min: 30
+
+  mine_countermeasures:
+    primary_assets: ["mine_hunting_usv", "mine_hunting_uuv"]
+    clearance_rate: 0.50
+    area_coverage_km2: 200
+    safety_radius_km: 2
+
+  command_control:
+    primary_assets: ["strike_usv", "ew_uav"]
+    network_redundancy: 3
+    bandwidth_mbps: 100
+    encryption_level: "AES-256"
+
+  logistics_support:
+    primary_assets: ["USV_Unmanned_Surface_Vessel"]
+    resupply_interval_hours: 48
+    fuel_autonomy_days: 7
+    maintenance_spare_capacity: 0.20
+
+operational_constraints:
+  total_platforms: 26
+  max_budget_million_usd: 850
+  deployment_area_km2: 70650
+  endurance_hours: 96
+  communication_range_km: 200
+  risk_tolerance: "MODERATE"
+  rules_of_engagement: "SELF_DEFENSE_ONLY"
+  weather_limitations:
+    max_wind_speed_knots: 25
+    max_wave_height_m: 3.0
+    min_visibility_km: 5
+
+capability_priorities:
+  C1_Situational_Awareness: 0.30
+  C2_Anti_Submarine_Warfare: 0.20
+  C3_Mine_Countermeasures: 0.20
+  C4_Command_Control: 0.15
+  C5_Logistics_Sustainment: 0.15
+
+expert_assessments:
+  C1_1_Detection_Range:
+    linguistic_term: "良"
+    confidence: 0.85
+    justification: "Good detection range with modern sensor suites"
+
+  C1_2_Coverage_Area:
+    linguistic_term: "良"
+    confidence: 0.80
+    justification: "Adequate coverage with coordinated multi-domain assets"
+
+  C1_3_Target_Classification:
+    linguistic_term: "中"
+    confidence: 0.75
+    justification: "Moderate classification capability with limited AI processing"
+
+  C2_1_Detection_Probability:
+    linguistic_term: "良"
+    confidence: 0.80
+    justification: "Good ASW detection with multi-sensor fusion"
+
+  C2_2_Tracking_Accuracy:
+    linguistic_term: "中"
+    confidence: 0.70
+    justification: "Moderate tracking with some sensor limitations"
+
+  C2_3_Engagement_Range:
+    linguistic_term: "中"
+    confidence: 0.75
+    justification: "Moderate engagement range for defensive operations"
+
+  C3_1_Detection_Rate:
+    linguistic_term: "良"
+    confidence: 0.85
+    justification: "Good mine detection with advanced sonar"
+
+  C3_2_Clearance_Speed:
+    linguistic_term: "中"
+    confidence: 0.70
+    justification: "Moderate clearance speed with limited assets"
+
+  C3_3_Safety_Margin:
+    linguistic_term: "优"
+    confidence: 0.90
+    justification: "Excellent safety procedures and conservative approaches"
+
+  C4_1_Network_Reliability:
+    linguistic_term: "良"
+    confidence: 0.85
+    justification: "Good network with multiple redundancy paths"
+
+  C4_2_Command_Lag:
+    linguistic_term: "良"
+    confidence: 0.80
+    justification: "Good command responsiveness with optimized protocols"
+
+  C4_3_Cyber_Resilience:
+    linguistic_term: "中"
+    confidence: 0.75
+    justification: "Moderate cyber protection with standard military crypto"
+
+  C5_1_Supply_Efficiency:
+    linguistic_term: "良"
+    confidence: 0.80
+    justification: "Good logistics with autonomous resupply capabilities"
+
+  C5_2_Maintenance_Ratio:
+    linguistic_term: "良"
+    confidence: 0.85
+    justification: "Good maintenance availability with modular design"
+
+  C5_3_Endurance:
+    linguistic_term: "良"
+    confidence: 0.80
+    justification: "Good endurance with fuel-efficient operations"

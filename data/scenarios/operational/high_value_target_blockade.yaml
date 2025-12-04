@@ -1,0 +1,265 @@
+# 要害目标封锁作战场景
+# High Value Target Blockade Scenario
+
+scenario_id: "high_value_target_blockade"
+scenario_name: "要害目标封锁作战"
+scenario_type: "sea_blockade_interdiction"
+description: "对敌方重要港口、基地或海域实施海上封锁，阻止人员、物资进出，切断海上生命线"
+
+# 作战环境设定
+operational_environment:
+  geography:
+    area_type: "港口、基地周边海域"
+    target_area: "半径50-100公里封锁区"
+    harbor_complexity: "高（多码头、航道复杂）"
+    access_points: "3-5个主要进出通道"
+    sea_lane_network: "密集商船航道"
+    coastal_features: "岛屿、礁石、浅滩"
+
+  strategic_importance: "极高（敌方经济、军事命脉）"
+  blockade_duration: "7-30天持续封锁"
+  mission_duration_hours: 168  # 7天初始评估
+  environmental_conditions: "多变（影响持续作战）"
+
+# 威胁设定
+threat_environment:
+  primary_threats:
+    - type: "敌方水面护航编队"
+      quantity: "4-8艘护卫舰/巡逻艇"
+      capability: "反潜、防空、火力支援"
+      escort_pattern: "重点船只护航"
+
+    - type: "敌方潜艇部队"
+      quantity: "2-5艘"
+      capability: "突破封锁、反封锁作战"
+      operating_tactics: "隐蔽渗透、狼群突击"
+
+    - type: "商船威胁"
+      quantity: "每日20-50艘"
+      types:
+        - "军用运输船"
+        - "油轮、货船"
+        - "特种船只（科研、医疗）"
+      threat_level: "识别和拦截难度高"
+
+    - type: "空中威胁"
+      types: "反潜直升机、海上巡逻机、攻击机"
+      basing: "附近机场、航母编队"
+      patrol_frequency: "每日4-6架次"
+
+    - type: "特种作战威胁"
+      types: "蛙人部队、特种渗透艇"
+      capability: "破坏封锁设施、特工渗透"
+      threat_level: "隐蔽性强"
+
+  international_factors:
+    - "第三方船只通过"
+    - "国际法约束"
+    - "外交压力"
+
+# 任务目标
+mission_objectives:
+  primary:
+    - objective: "海上封锁实施"
+      weight: 0.35
+      description: "建立有效海上封锁，阻止目标进出"
+      success_criteria: "封锁成功率≥95%，拦截时间≤30分钟"
+
+    - objective: "目标识别拦截"
+      weight: 0.25
+      description: "准确识别并拦截违禁船只"
+      success_criteria: "识别准确率≥90%，拦截成功率≥85%"
+
+    - objective: "持续封锁维持"
+      weight: 0.20
+      description: "长期维持封锁有效性"
+      success_criteria: "系统完好率≥90%，24/7持续作业"
+
+    - objective: "国际法合规"
+      weight: 0.20
+      description: "在遵守国际法前提下执行封锁"
+      success_criteria: "合规率100%，外交纠纷最小化"
+
+# 作战约束
+operational_constraints:
+  rules_of_engagement:
+    identification_standard: "严格（防止误伤）"
+    use_of_force: "渐进式（警告→拦截→武力）"
+    international_law: "严格遵守"
+    proportionality: "武力使用适度"
+
+  area_restrictions:
+    exclusion_zone: "半径30海里绝对封锁区"
+    monitoring_zone: "半径100海里监视区"
+    safe_passage_corridors: "人道主义通道（需批准）"
+    territorial_waters: "尊重主权"
+
+  coordination_requirements:
+    intelligence_support: "卫星、侦察机持续监视"
+    legal_support: "国际法专家团队"
+    diplomatic_coordination: "外交部门配合"
+    media_management: "舆论导向控制"
+
+# 基因编码配置
+chromosome_encoding:
+  genes:
+    # 无人水面艇配置
+    - name: "num_patrol_usv"
+      type: "integer"
+      range: [8, 15]
+      description: "巡逻USV数量（海域巡逻、监视）"
+      role: "sea_patrol"
+
+    - name: "num_intercept_usv"
+      type: "integer"
+      range: [4, 8]
+      description: "拦截USV数量（武装拦截艇）"
+      role: "vessel_interception"
+
+    - name: "num_inspection_usv"
+      type: "integer"
+      range: [3, 6]
+      description: "检查USV数量（登船检查）"
+      role: "boarding_inspection"
+
+    - name: "num_command_usv"
+      type: "integer"
+      range: [2, 5]
+      description: "指挥USV数量（战术协调）"
+      role: "blockade_coordination"
+
+    # 无人水下艇配置
+    - name: "num_submarine_hunter_uuv"
+      type: "integer"
+      range: [6, 10]
+      description: "反潜UUV数量（反潜巡逻）"
+      role: "anti_submarine_patrol"
+
+    - name: "num_underwater_monitor_uuv"
+      type: "integer"
+      range: [4, 7]
+      description: "水下监视UUV数量（水下监视）"
+      role: "underwater_surveillance"
+
+    - name: "num_mcm_uuv"
+      type: "integer"
+      range: [3, 6]
+      description: "反水雷UUV数量（航道安全）"
+      role: "mine_countermeasure"
+
+    - name: "num_stealth_uuv"
+      type: "integer"
+      range: [2, 4]
+      description: "隐身UUV数量（隐蔽侦察）"
+      role: "covert_monitoring"
+
+# 约束条件
+constraints:
+  budget:
+    type: "hard"
+    max_budget_million_usd: 110.0
+    cost_per_platform:
+      patrol_usv: 3.5
+      intercept_usv: 7.0
+      inspection_usv: 4.5
+      command_usv: 6.5
+      submarine_hunter_uuv: 7.5
+      underwater_monitor_uuv: 5.0
+      mcm_uuv: 4.0
+      stealth_uuv: 9.0
+
+  platform_limits:
+    type: "hard"
+    total_platforms:
+      min: 28
+      max: 50
+    usv_limits:
+      min: 15
+      max: 28
+    uuv_limits:
+      min: 12
+      max: 22
+
+  capability_requirements:
+    type: "soft"
+    minimum_blockade_effectiveness: 0.90   # 封锁效能
+    minimum_interception_capability: 0.85   # 拦截能力
+    minimum_surveillance_coverage: 0.95     # 监视覆盖
+    minimum_coordination_efficiency: 0.90   # 协调效率
+
+  deployment_area:
+    type: "hard"
+    max_deployment_radius_km: 120
+    min_coverage_percentage: 98  # 封锁区覆盖率
+    primary_sector_radius_km: 80
+    blockade_layers: 3  # 三层封锁体系
+
+  endurance:
+    type: "hard"
+    minimum_endurance_hours: 120  # 5天持续作战
+    maximum_endurance_hours: 336  # 14天极限作战
+
+# 遗传算法参数
+ga_parameters:
+  population_size: 45
+  num_generations: 90
+  num_parents_mating: 9
+  crossover_rate: 0.85
+  mutation_rate: 0.10
+  parent_selection_type: "tournament"
+  crossover_type: "two_point"
+  mutation_type: "adaptive"
+  keep_parents: 3
+  stop_criteria: "reach_target_fitness or generations"
+
+# 适应度函数权重
+objective_weights:
+  blockade_effectiveness: 0.35      # 封锁效能
+  interception_capability: 0.25     # 拦截能力
+  surveillance_persistence: 0.25    # 持续监视能力
+  coordination_complexity: 0.15     # 协调复杂度
+
+# 终止条件
+termination_criteria:
+  target_fitness: 0.93       # 目标适应度
+  max_generations: 90
+  convergence_generations: 18
+  min_diversity: 0.10
+
+# 评估指标侧重
+evaluation_focus:
+  primary_indicators:
+    - "C2_2"  # 威胁评估能力
+    - "C4_1"  # 信息传输能力
+    - "C3_1"  # 火力打击能力
+    - "C5_1"  # 抗毁能力
+    - "C2_3"  # 决策响应能力
+
+  secondary_indicators:
+    - "C1_1"  # 侦察探测能力
+    - "C4_3"  # 协同作战能力
+    - "C5_3"  # 持续作战能力
+    - "C3_3"  # 电子对抗能力
+
+# 输出配置
+output_config:
+  save_generation_history: true
+  save_best_solutions: true
+  save_diversity_metrics: true
+  create_convergence_plots: true
+  export_solution_yaml: true
+  detailed_analysis_report: true
+
+# 场景特殊要求
+scenario_specific_requirements:
+  legal_compliance_emphasis: true   # 强调法律合规
+  coordination_complexity: extreme   # 极高协调复杂度
+  persistent_operations: true       # 持续作战要求
+  international_considerations: true # 国际因素考虑
+  information_dominance: 1.3        # 信息优势因子
+  operational_sustainability: 1.2   # 作战持续性因子
+
+created_by: "maritime_blockade_specialist"
+creation_date: "2025-10-25"
+version: "1.0"
+classification: "top_secret"

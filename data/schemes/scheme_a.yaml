@@ -1,0 +1,76 @@
+# Combat System Configuration: Scheme A
+# Enhanced surveillance and strike capability
+
+scheme_id: "scheme_a"
+scheme_name: "Enhanced Surveillance Strike Package"
+description: "Optimized for superior situational awareness and strike capability"
+created_by: "systems_analyst"
+creation_date: "2025-10-25"
+scenario_context: "High-threat strait control requiring superior detection"
+
+# Platform Inventory
+platform_inventory:
+  USV_Unmanned_Surface_Vessel:
+    count: 10
+    types:
+      patrol_usv: 4
+      surveillance_usv: 4
+      strike_usv: 2
+
+  UUV_Unmanned_Underwater_Vessel:
+    count: 5
+    types:
+      attack_uuv: 3
+      reconnaissance_uuv: 2
+
+# Deployment Plan
+deployment_plan:
+  primary_sector:
+    coordinates: [25.0, 121.0]
+    radius_km: 60
+
+  secondary_sectors:
+    - coordinates: [24.8, 121.3]
+      radius_km: 35
+    - coordinates: [25.2, 120.7]
+      radius_km: 35
+    - coordinates: [24.6, 121.6]
+      radius_km: 25
+
+# Task Assignments
+task_assignments:
+  surveillance_patrol:
+    assigned_platforms: 5
+    platform_types: ["surveillance_usv", "patrol_usv"]
+    priority: "high"
+
+  anti_submarine_warfare:
+    assigned_platforms: 4
+    platform_types: ["attack_uuv", "reconnaissance_uuv"]
+    priority: "high"
+
+  mine_countermeasures:
+    assigned_platforms: 3
+    platform_types: ["patrol_usv", "reconnaissance_uuv"]
+    priority: "medium"
+
+  area_denial:
+    assigned_platforms: 3
+    platform_types: ["attack_uuv", "strike_usv"]
+    priority: "medium"
+
+# Operational Constraints
+operational_constraints:
+  max_budget_million_usd: 52.0
+  total_platforms: 15
+  deployment_area_km2: 6500
+  endurance_hours: 84
+  communication_range_km: 120
+
+# Simplified Simulation Parameters
+simulation_parameters:
+  detection_range_factor: 1.3  # 30% better than baseline
+  coordination_efficiency: 0.85  # Improved coordination
+  weapon_effectiveness: 0.90  # Better weapon systems
+  network_bandwidth_mbps: 150
+  stealth_factor: 0.65  # Better stealth

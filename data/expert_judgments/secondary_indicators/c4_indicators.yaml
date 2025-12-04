@@ -1,0 +1,27 @@
+# Expert Judgment Matrix: C4 Secondary Indicators
+# AHP pairwise comparison for C4 Network Connectivity indicators
+
+matrix_id: "c4_secondary_indicators"
+expert_id: "expert_001"
+primary_capability: "C4"
+comparison_scope: "C4_1, C4_2, C4_3 - Network Connectivity indicators"
+dimension: 3
+
+# Comparison matrix (3×3 for C4 secondary indicators)
+# Rows/Columns: C4_1, C4_2, C4_3
+matrix:
+  - [1.0, 1.0, 1.0]  # C4_1 vs all (信息传输能力 vs others)
+  - [1.0, 1.0, 1.0]  # C4_2 vs all (网络可靠性 vs others)
+  - [1.0, 1.0, 1.0]  # C4_3 vs all (协同作战能力 vs others)
+
+# Computed values (filled by ahp_module.py)
+calculated_cr: 0.0  # Perfectly consistent
+weights: [0.33, 0.33, 0.34]  # Normalized principal eigenvector (相对权重)
+# 对应配置文件权重: [0.05, 0.05, 0.05]，总和0.15
+validation_status: "valid"
+lambda_max: 3.0  # Maximum eigenvalue
+
+# Expert metadata
+expert_qualification: "Communications Systems Specialist"
+assessment_date: "2025-10-25"
+context: "Network-centric naval operations"

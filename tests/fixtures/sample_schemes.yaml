@@ -1,0 +1,144 @@
+# Sample Combat System Schemes for Testing
+# This file contains test configurations with various characteristics
+
+baseline_scheme:
+  scheme_id: "test_baseline"
+  scheme_name: "Baseline Test Configuration"
+  description: "Standard configuration for testing purposes"
+
+  platform_inventory:
+    USV_Unmanned_Surface_Vessel:
+      count: 5
+      types:
+        surveillance: 3
+        anti_submarine: 2
+    UUV_Unmanned_Underwater_Vessel:
+      count: 3
+      types:
+        mine_countermeasures: 2
+        surveillance: 1
+
+  deployment_plan:
+    primary_sector:
+      coordinates: [50.0, 45.0]
+      radius_km: 50
+
+  task_assignments:
+    surveillance_mission:
+      assigned_platforms: 4
+      priority: "high"
+    anti_submarine_mission:
+      assigned_platforms: 2
+      priority: "medium"
+    mine_countermeasures_mission:
+      assigned_platforms: 2
+      priority: "low"
+
+  operational_constraints:
+    total_platforms: 8
+    max_budget_million_usd: 20.0
+    deployment_area_km2: 5000
+    endurance_hours: 72
+    communication_range_km: 100
+
+high_capability_scheme:
+  scheme_id: "test_high_cap"
+  scheme_name: "High Capability Test Configuration"
+  description: "Enhanced configuration with more platforms"
+
+  platform_inventory:
+    USV_Unmanned_Surface_Vessel:
+      count: 8
+      types:
+        surveillance: 4
+        anti_submarine: 4
+    UUV_Unmanned_Underwater_Vessel:
+      count: 6
+      types:
+        mine_countermeasures: 3
+        surveillance: 2
+        anti_submarine: 1
+
+  deployment_plan:
+    primary_sector:
+      coordinates: [55.0, 50.0]
+      radius_km: 60
+
+  task_assignments:
+    surveillance_mission:
+      assigned_platforms: 6
+      priority: "high"
+    anti_submarine_mission:
+      assigned_platforms: 5
+      priority: "high"
+    mine_countermeasures_mission:
+      assigned_platforms: 3
+      priority: "medium"
+
+  operational_constraints:
+    total_platforms: 14
+    max_budget_million_usd: 35.0
+    deployment_area_km2: 7000
+    endurance_hours: 96
+    communication_range_km: 150
+
+minimal_scheme:
+  scheme_id: "test_minimal"
+  scheme_name: "Minimal Test Configuration"
+  description: "Minimal configuration for edge case testing"
+
+  platform_inventory:
+    USV_Unmanned_Surface_Vessel:
+      count: 2
+      types:
+        surveillance: 1
+        anti_submarine: 1
+    UUV_Unmanned_Underwater_Vessel:
+      count: 1
+      types:
+        mine_countermeasures: 1
+
+  deployment_plan:
+    primary_sector:
+      coordinates: [45.0, 40.0]
+      radius_km: 30
+
+  task_assignments:
+    surveillance_mission:
+      assigned_platforms: 1
+      priority: "medium"
+    anti_submarine_mission:
+      assigned_platforms: 1
+      priority: "low"
+    mine_countermeasures_mission:
+      assigned_platforms: 1
+      priority: "low"
+
+  operational_constraints:
+    total_platforms: 3
+    max_budget_million_usd: 7.5
+    deployment_area_km2: 2000
+    endurance_hours: 48
+    communication_range_km: 75
+
+invalid_scheme_missing_platforms:
+  scheme_id: "test_invalid_missing_platforms"
+  description: "Invalid scheme missing platform inventory"
+  # Missing platform_inventory section
+  deployment_plan:
+    primary_sector:
+      coordinates: [50.0, 45.0]
+      radius_km: 50
+
+invalid_scheme_wrong_coordinates:
+  scheme_id: "test_invalid_coordinates"
+  description: "Invalid scheme with malformed coordinates"
+  platform_inventory:
+    USV_Unmanned_Surface_Vessel:
+      count: 2
+      types:
+        surveillance: 2
+  deployment_plan:
+    primary_sector:
+      coordinates: [50.0]  # Missing y-coordinate
+      radius_km: 50

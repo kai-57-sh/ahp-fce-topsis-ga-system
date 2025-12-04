@@ -1,0 +1,13 @@
+# Core dependencies for AHP-FCE-TOPSIS-GA Evaluation System
+numpy>=1.21.0
+pandas>=1.3.0
+pygad>=3.0.0
+matplotlib>=3.5.0
+pyyaml>=6.0
+
+# Testing framework
+pytest>=7.0.0
+
+# Development dependencies (optional)
+black>=22.0.0
+flake8>=4.0.0

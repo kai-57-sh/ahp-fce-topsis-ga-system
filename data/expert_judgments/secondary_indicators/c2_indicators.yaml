@@ -1,0 +1,27 @@
+# Expert Judgment Matrix: C2 Secondary Indicators
+# AHP pairwise comparison for C2 Command Capability indicators
+
+matrix_id: "c2_secondary_indicators"
+expert_id: "expert_001"
+primary_capability: "C2"
+comparison_scope: "C2_1, C2_2, C2_3 - Command Capability indicators"
+dimension: 3
+
+# Comparison matrix (3×3 for C2 secondary indicators)
+# Rows/Columns: C2_1, C2_2, C2_3
+matrix:
+  - [1.0, 1.0, 1.0]  # C2_1 vs all (任务规划能力 vs others)
+  - [1.0, 1.0, 1.0]  # C2_2 vs all (威胁评估能力 vs others)
+  - [1.0, 1.0, 1.0]  # C2_3 vs all (决策响应能力 vs others)
+
+# Computed values (filled by ahp_module.py)
+calculated_cr: 0.0  # Perfectly consistent
+weights: [0.333, 0.333, 0.334]  # Normalized principal eigenvector (相对权重)
+# 对应配置文件权重: [0.07, 0.07, 0.06]，总和0.20
+validation_status: "valid"
+lambda_max: 3.0  # Maximum eigenvalue
+
+# Expert metadata
+expert_qualification: "Command and Control Specialist"
+assessment_date: "2025-10-25"
+context: "Network-centric warfare operations"

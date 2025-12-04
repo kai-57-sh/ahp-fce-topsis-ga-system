@@ -1,0 +1,41 @@
+# Test Scenario for GA Optimization
+scenario_id: "test_scenario_001"
+scenario_name: "North Atlantic Patrol Scenario"
+description: "Test scenario for GA optimization validation"
+
+# Operational constraints
+constraints:
+  platform_limits:
+    min: 5
+    max: 15
+  budget:
+    max_budget_million_usd: 50.0
+  area_of_operations:
+    description: "North Atlantic patrol area"
+    size_km2: 10000
+  duration_days: 30
+
+# Environmental conditions
+environmental_conditions:
+  sea_state: "moderate"
+  visibility: "good"
+  weather_impact_factor: 0.8
+
+# Mission requirements
+mission_requirements:
+  primary_tasks:
+    - surveillance
+    - anti_submarine_warfare
+  secondary_tasks:
+    - mine_countermeasures
+  patrol_hours_per_day: 18
+  response_time_minutes: 30
+
+# Threat environment
+threat_environment:
+  threat_level: "medium"
+  threat_types:
+    - diesel_submarines
+    - fast_attack_craft
+    - naval_mines
+  threat_density: "low"

@@ -1,0 +1,27 @@
+# Expert Judgment Matrix: C3 Secondary Indicators
+# AHP pairwise comparison for C3 Strike Capability indicators
+
+matrix_id: "c3_secondary_indicators"
+expert_id: "expert_001"
+primary_capability: "C3"
+comparison_scope: "C3_1, C3_2, C3_3 - Strike Capability indicators"
+dimension: 3
+
+# Comparison matrix (3×3 for C3 secondary indicators)
+# Rows/Columns: C3_1, C3_2, C3_3
+matrix:
+  - [1.0, 1.0, 1.0]  # C3_1 vs all (火力打击能力 vs others)
+  - [1.0, 1.0, 1.0]  # C3_2 vs all (机动占位能力 vs others)
+  - [1.0, 1.0, 1.0]  # C3_3 vs all (电子对抗能力 vs others)
+
+# Computed values (filled by ahp_module.py)
+calculated_cr: 0.0  # Perfectly consistent
+weights: [0.333, 0.333, 0.334]  # Normalized principal eigenvector (相对权重)
+# 对应配置文件权重: [0.08, 0.09, 0.08]，总和0.25
+validation_status: "valid"
+lambda_max: 3.0  # Maximum eigenvalue
+
+# Expert metadata
+expert_qualification: "Weapons Systems Specialist"
+assessment_date: "2025-10-25"
+context: "Anti-surface warfare operations"

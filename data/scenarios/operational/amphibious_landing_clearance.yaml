@@ -1,0 +1,269 @@
+# 登陆场通道清扫作战场景
+# Amphibious Landing Lane Clearance Scenario
+
+scenario_id: "amphibious_landing_clearance"
+scenario_name: "登陆场通道清扫作战"
+scenario_type: "mine_countermeasure_lane_clearance"
+description: "为两栖登陆作战清扫安全通道，清除水雷、障碍物，确保登陆部队安全上陆"
+
+# 作战环境设定
+operational_environment:
+  geography:
+    area_type: "登陆海滩及周边海域"
+    beach_length: "5-15公里"
+    water_depth_gradient: "浅水到深水渐变"
+    bottom_type: "沙质、岩质混合"
+    surf_conditions: "中等（影响UUV作业）"
+    tidal_range: "2-4米"
+
+  operational_phase: "登陆前阶段（D-Day-24h至D-Day）"
+  mission_duration_hours: 48
+  weather_constraints: "中等海况（浪高≤2米）"
+  time_sensitivity: "极高（必须按时完成）"
+  risk_tolerance: "低（关系登陆成败）"
+
+# 威胁设定
+threat_environment:
+  primary_threats:
+    - type: "水雷障碍"
+      quantity: "100-300枚"
+      types:
+        - "触发锚雷（浅水区）"
+        - "磁性感应水雷（中深水）"
+        - "智能水雷（深水区）"
+        - "漂雷（潮汐影响）"
+      density: "高密度分层布防"
+      clearance_difficulty: "高"
+
+    - type: "水下障碍物"
+      quantity: "20-50个"
+      types:
+        - "水下铁丝网"
+        - "混凝土障碍物"
+        - "金属拒马"
+        - "海底自然障碍"
+      locations: "登陆通道、换乘区"
+
+    - type: "岸防火力威胁"
+      range: "5-15公里"
+      types: "反舰导弹、海岸炮兵"
+      threat_level: "中等到高"
+      reaction_time: "15-30分钟"
+
+    - type: "敌方监视力量"
+      types: "雷达站、观察哨、无人机"
+      detection_capability: "海面监视、水下探测"
+      response_capability: "快速反应部队"
+
+  environmental_challenges:
+    - "海底地形复杂"
+    - "水体能见度低"
+    - "电磁干扰环境"
+    - "时间窗口紧迫"
+
+# 任务目标
+mission_objectives:
+  primary:
+    - objective: "安全通道开辟"
+      weight: 0.40
+      description: "开辟至少3条安全登陆通道"
+      success_criteria: "通道宽度≥100米，长度直达岸线，通过率100%"
+
+    - objective: "水雷清除效率"
+      weight: 0.25
+      description: "高效清除通道内水雷威胁"
+      success_criteria: "清除率≥98%，遗漏率≤2%，作业时间≤12小时"
+
+    - objective: "障碍物破除"
+      weight: 0.20
+      description: "清除水下人为障碍物"
+      success_criteria: "障碍物清除率≥95%，不影响后续登陆"
+
+    - objective: "实时勘察更新"
+      weight: 0.15
+      description: "持续更新海底威胁态势图"
+      success_criteria: "勘察覆盖率100%，信息更新频率≤15分钟"
+
+# 作战约束
+operational_constraints:
+  rules_of_engagement:
+    operational_secrecy: "极高（防止敌方察觉）"
+    time_constraints: "严格（必须按登陆时间表）"
+    collateral_damage: "最小（保护海滩环境）"
+    friendly_force_protection: "优先"
+
+  area_restrictions:
+    operating_area: "距岸线20海里内"
+    exclusion_zones: "民用设施、生态保护区"
+    depth_limits: "5-50米（登陆艇作业深度）"
+    surface_activity: "夜间作业，隐蔽行动"
+
+  coordination_requirements:
+    landing_forces: "海军陆战队、两栖攻击舰"
+    fire_support: "舰炮火力、岸基航空兵"
+    eod_support: "爆炸物处理专家"
+    medical_support: "近距离医疗后送"
+
+# 基因编码配置
+chromosome_encoding:
+  genes:
+    # 无人水面艇配置
+    - name: "num_mcm_usv"
+      type: "integer"
+      range: [6, 12]
+      description: "反水雷USV数量（配备猎雷声呐）"
+      role: "mine_hunting"
+
+    - name: "num_survey_usv"
+      type: "integer"
+      range: [4, 8]
+      description: "勘察USV数量（海底地形测绘）"
+      role: "bottom_survey"
+
+    - name: "num_obstacle_usv"
+      type: "integer"
+      range: [3, 6]
+      description: "清障USV数量（机械臂、炸药）"
+      role: "obstacle_clearance"
+
+    - name: "num_command_usv"
+      type: "integer"
+      range: [2, 4]
+      description: "指挥USV数量（战术协调）"
+      role: "tactical_coordination"
+
+    # 无人水下艇配置
+    - name: "num_mcm_uuv"
+      type: "integer"
+      range: [8, 15]
+      description: "反水雷UUV数量（灭雷、标识）"
+      role: "mine_disposal"
+
+    - name: "num_reconnaissance_uuv"
+      type: "integer"
+      range: [4, 8]
+      description: "侦察UUV数量（近距离侦察）"
+      role: "close_in_reconnaissance"
+
+    - name: "num_obstacle_uuv"
+      type: "integer"
+      range: [3, 6]
+      description: "清障UUV数量（水下爆破）"
+      role: "underwater_demolition"
+
+    - name: "num_support_uuv"
+      type: "integer"
+      range: [2, 4]
+      description: "支援UUV数量（通信中继、导航）"
+      role: "communication_navigation"
+
+# 约束条件
+constraints:
+  budget:
+    type: "hard"
+    max_budget_million_usd: 100.0
+    cost_per_platform:
+      mcm_usv: 6.5
+      survey_usv: 4.0
+      obstacle_usv: 5.5
+      command_usv: 7.0
+      mcm_uuv: 5.0
+      reconnaissance_uuv: 4.5
+      obstacle_uuv: 6.0
+      support_uuv: 3.5
+
+  platform_limits:
+    type: "hard"
+    total_platforms:
+      min: 25
+      max: 45
+    usv_limits:
+      min: 12
+      max: 22
+    uuv_limits:
+      min: 15
+      max: 28
+
+  capability_requirements:
+    type: "soft"
+    minimum_mine_clearance_rate: 0.90     # 水雷清除率
+    minimum_obstacle_clearance_rate: 0.85 # 障碍清除率
+    minimum_survey_accuracy: 0.95         # 勘察精度
+    minimum_coordination_efficiency: 0.90 # 协调效率
+
+  deployment_area:
+    type: "hard"
+    max_deployment_radius_km: 25  # 距离登陆场距离
+    min_coverage_percentage: 100  # 登陆通道100%覆盖
+    primary_sector_radius_km: 15
+    lane_requirements: 3  # 至少3条通道
+
+  endurance:
+    type: "hard"
+    minimum_endurance_hours: 36
+    maximum_endurance_hours: 72
+
+# 遗传算法参数
+ga_parameters:
+  population_size: 35
+  num_generations: 70
+  num_parents_mating: 7
+  crossover_rate: 0.80
+  mutation_rate: 0.15
+  parent_selection_type: "tournament"
+  crossover_type: "uniform"
+  mutation_type: "random"
+  keep_parents: 2
+  stop_criteria: "reach_target_fitness or generations"
+
+# 适应度函数权重
+objective_weights:
+  mine_clearance_effectiveness: 0.40    # 水雷清除效能
+  obstacle_removal_capability: 0.25     # 障碍清除能力
+  survey_mapping_accuracy: 0.20         # 勘察测绘精度
+  operational_coordination: 0.15         # 作业协调能力
+
+# 终止条件
+termination_criteria:
+  target_fitness: 0.92       # 目标适应度
+  max_generations: 70
+  convergence_generations: 12
+  min_diversity: 0.15
+
+# 评估指标侧重
+evaluation_focus:
+  primary_indicators:
+    - "C3_2"  # 机动占位能力
+    - "C1_1"  # 侦察探测能力
+    - "C2_3"  # 决策响应能力
+    - "C4_3"  # 协同作战能力
+    - "C5_2"  # 任务恢复能力
+
+  secondary_indicators:
+    - "C1_3"  # 态势理解能力
+    - "C2_1"  # 任务规划能力
+    - "C3_1"  # 火力打击能力
+    - "C4_1"  # 信息传输能力
+
+# 输出配置
+output_config:
+  save_generation_history: true
+  save_best_solutions: true
+  save_diversity_metrics: true
+  create_convergence_plots: true
+  export_solution_yaml: true
+  detailed_analysis_report: true
+
+# 场景特殊要求
+scenario_specific_requirements:
+  time_critical_operations: true    # 时间敏感作战
+  precision_requirements: high       # 高精度要求
+  stealth_operations: true          # 隐蔽作业要求
+  risk_acceptance_level: low        # 低风险承受度
+  operational_continuity: 1.4       # 作战连续性因子
+  clearance_efficiency_factor: 1.3  # 清扫效率因子
+
+created_by: "amphibious_warfare_specialist"
+creation_date: "2025-10-25"
+version: "1.0"
+classification: "secret"

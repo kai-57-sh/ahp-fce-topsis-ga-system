@@ -1,0 +1,250 @@
+# 海峡要道控守作战场景
+# Strategic Strait Control Defense Scenario
+
+scenario_id: "strait_control_defense"
+scenario_name: "海峡要道控守作战"
+scenario_type: "area_control_defense"
+description: "在关键海峡要道实施全方位控制，阻止敌方通过，保护己方海上交通线"
+
+# 作战环境设定
+operational_environment:
+  geography:
+    area_type: "海峡要道"
+    strait_width: "15-50公里"
+    strait_length: "80-200公里"
+    water_depth: "50-500米"
+    bottleneck_points: "2-3个关键窄点"
+    island_coverage: "中等（可用于部署传感器）"
+
+  strategic_importance: "极高"
+  traffic_density: "高（民用+军用）"
+  mission_duration_hours: 96
+  weather_conditions: "多变（海峡特殊气象）"
+  tidal_conditions: "强潮流（影响作战部署）"
+
+# 威胁设定
+threat_environment:
+  primary_threats:
+    - type: "敌方水面战斗群"
+      quantity: "2-3艘护卫舰/驱逐舰"
+      capability: "反舰、防空、反潜作战能力"
+      threat_level: "高"
+
+    - type: "敌方潜艇"
+      quantity: "3-6艘"
+      capability: "攻击型潜艇，具备对陆攻击能力"
+      operating_depth: "50-300米"
+
+    - type: "导弹攻击艇"
+      quantity: "4-8艘"
+      capability: "反舰导弹，高速突击"
+      attack_pattern: "狼群战术"
+
+    - type: "航空威胁"
+      quantity: "6-12架"
+      capability: "反舰攻击、电子干扰"
+      basing: "陆基航空兵"
+
+    - type: "水雷威胁"
+      quantity: "50-100枚"
+      types: "触发水雷、感应水雷、智能水雷"
+      deployment_pattern: "分层布防"
+
+  threat_coordination: "高（联合作战）"
+  attack_timing: "可能选择夜间或恶劣天气"
+
+# 任务目标
+mission_objectives:
+  primary:
+    - objective: "海峡通道控制"
+      weight: 0.40
+      description: "建立对海峡的有效控制，阻止敌方通过"
+      success_criteria: "阻止率≥95%，响应时间≤15分钟"
+
+    - objective: "多层防御体系"
+      weight: 0.25
+      description: "构建远中近三层防御体系"
+      success_criteria: "防御层次完整率100%，各层协同度≥90%"
+
+    - objective: "火力打击能力"
+      weight: 0.20
+      description: "对突破防御的敌目标实施精确打击"
+      success_criteria: "目标捕获率≥90%，打击成功率≥80%"
+
+    - objective: "持续作战能力"
+      weight: 0.15
+      description: "维持96小时以上连续作战能力"
+      success_criteria: "作战系统完好率≥85%，弹药储备充足"
+
+# 作战约束
+operational_constraints:
+  rules_of_engagement:
+    engagement_authority: "积极防御，必要时主动出击"
+    identification_requirement: "敌方识别标准适度放宽"
+    collateral_damage_tolerance: "低（考虑民用航运）"
+
+  area_restrictions:
+    control_area: "海峡及周边50海里"
+    international_waters: "遵守国际法，尊重航行自由"
+    civilian_protection: "优先保护民用船只安全"
+
+  coordination_requirements:
+    joint_forces: "岸基导弹、航空兵、水面舰艇"
+    command_structure: "统一指挥，分布式执行"
+    intelligence_support: "卫星、侦察机多重情报支持"
+
+# 基因编码配置
+chromosome_encoding:
+  genes:
+    # 无人水面艇配置
+    - name: "num_patrol_usv"
+      type: "integer"
+      range: [6, 12]
+      description: "巡逻USV数量（武装巡逻艇）"
+      role: "armed_patrol"
+
+    - name: "num_missile_usv"
+      type: "integer"
+      range: [3, 8]
+      description: "导弹USV数量（配备反舰导弹）"
+      role: "anti_ship_strike"
+
+    - name: "num_asw_usv"
+      type: "integer"
+      range: [4, 7]
+      description: "反潜USV数量（配备拖曳阵声呐）"
+      role: "anti_submarine_warfare"
+
+    - name: "num_command_usv"
+      type: "integer"
+      range: [2, 4]
+      description: "指挥USV数量（战术指挥控制）"
+      role: "tactical_command"
+
+    # 无人水下艇配置
+    - name: "num_attack_uuv"
+      type: "integer"
+      range: [4, 8]
+      description: "攻击UUV数量（鱼雷、导弹）"
+      role: "underwater_strike"
+
+    - name: "num_reconnaissance_uuv"
+      type: "integer"
+      range: [3, 6]
+      description: "侦察UUV数量（水下监视）"
+      role: "underwater_reconnaissance"
+
+    - name: "num_mcm_uuv"
+      type: "integer"
+      range: [4, 8]
+      description: "反水雷UUV数量"
+      role: "mine_countermeasures"
+
+# 约束条件
+constraints:
+  budget:
+    type: "hard"
+    max_budget_million_usd: 120.0
+    cost_per_platform:
+      patrol_usv: 4.0
+      missile_usv: 8.5
+      asw_usv: 6.0
+      command_usv: 7.5
+      attack_uuv: 9.0
+      reconnaissance_uuv: 5.5
+      mcm_uuv: 4.5
+
+  platform_limits:
+    type: "hard"
+    total_platforms:
+      min: 20
+      max: 40
+    usv_limits:
+      min: 12
+      max: 25
+    uuv_limits:
+      min: 8
+      max: 18
+
+  capability_requirements:
+    type: "soft"
+    minimum_strike_capability: 0.80     # 打击能力
+    minimum_anti_submarine_capability: 0.75  # 反潜能力
+    minimum_mine_countermeasure_capability: 0.70  # 反水雷能力
+    minimum_command_control_capability: 0.85   # 指挥控制能力
+
+  deployment_area:
+    type: "hard"
+    max_deployment_radius_km: 100
+    min_coverage_percentage: 95  # 海峡覆盖率要求
+    primary_sector_radius_km: 60
+    defensive_layers: 3  # 三层防御
+
+  endurance:
+    type: "hard"
+    minimum_endurance_hours: 72
+    maximum_endurance_hours: 168  # 7天持续作战
+
+# 遗传算法参数
+ga_parameters:
+  population_size: 40
+  num_generations: 80
+  num_parents_mating: 8
+  crossover_rate: 0.85
+  mutation_rate: 0.12
+  parent_selection_type: "tournament"
+  crossover_type: "two_point"
+  mutation_type: "random"
+  keep_parents: 3
+  stop_criteria: "reach_target_fitness or generations"
+
+# 适应度函数权重
+objective_weights:
+  strike_effectiveness: 0.35        # 打击效能
+  anti_submarine_capability: 0.25   # 反潜能力
+  command_control_efficiency: 0.20  # 指挥控制效率
+  mine_countermeasure_effectiveness: 0.20  # 反水雷效能
+
+# 终止条件
+termination_criteria:
+  target_fitness: 0.90       # 目标适应度
+  max_generations: 80
+  convergence_generations: 15
+  min_diversity: 0.12
+
+# 评估指标侧重
+evaluation_focus:
+  primary_indicators:
+    - "C3_1"  # 火力打击能力
+    - "C2_1"  # 任务规划能力
+    - "C1_1"  # 侦察探测能力
+    - "C4_1"  # 信息传输能力
+    - "C5_1"  # 抗毁能力
+
+  secondary_indicators:
+    - "C3_3"  # 电子对抗能力
+    - "C2_3"  # 决策响应能力
+    - "C4_3"  # 协同作战能力
+    - "C5_2"  # 任务恢复能力
+
+# 输出配置
+output_config:
+  save_generation_history: true
+  save_best_solutions: true
+  save_diversity_metrics: true
+  create_convergence_plots: true
+  export_solution_yaml: true
+  detailed_analysis_report: true
+
+# 场景特殊要求
+scenario_specific_requirements:
+  layered_defense_emphasis: true    # 强调分层防御
+  coordination_complexity: high      # 高复杂度协同要求
+  real_time_target_allocation: true  # 实时目标分配
+  electronic_warfare_integration: true  # 电子战集成
+  joint_operation_capability: 1.3   # 联合作战能力因子
+
+created_by: "strategic_defense_analyst"
+creation_date: "2025-10-25"
+version: "1.0"
+classification: "top_secret"

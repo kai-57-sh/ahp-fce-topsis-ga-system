@@ -1,0 +1,130 @@
+# Sample Fuzzy Evaluation Data for Testing
+# This file contains expert assessments for fuzzy evaluation testing
+
+expert_assessments_single:
+  description: "Single expert assessment for testing"
+  experts:
+    expert_001:
+      name: "Test Expert 1"
+      role: "military_analyst"
+      experience_years: 15
+      assessments:
+        C1_1:  # Surveillance capability
+          linguistic_term: "良"  # Good
+          confidence: 0.9
+          justification: "Strong sensor performance observed"
+        C1_2:  # Detection range
+          linguistic_term: "中"  # Medium
+          confidence: 0.8
+          justification: "Moderate detection capabilities"
+        C2_1:  # Anti-submarine capability
+          linguistic_term: "优"  # Excellent
+          confidence: 0.85
+          justification: "Advanced ASW systems"
+        C3_1:  # Mine countermeasures
+          linguistic_term: "良"  # Good
+          confidence: 0.8
+          justification: "Effective mine detection and clearance"
+
+expert_assessments_multiple:
+  description: "Multiple expert assessments for testing"
+  experts:
+    expert_001:
+      name: "Test Expert 1"
+      role: "naval_commander"
+      experience_years: 20
+      assessments:
+        C1_1:
+          linguistic_term: "优"
+          confidence: 0.9
+          justification: "Excellent surveillance systems"
+        C1_2:
+          linguistic_term: "良"
+          confidence: 0.85
+          justification: "Good detection range"
+    expert_002:
+      name: "Test Expert 2"
+      role: "systems_engineer"
+      experience_years: 12
+      assessments:
+        C1_1:
+          linguistic_term: "良"
+          confidence: 0.8
+          justification: "Good but not optimal performance"
+        C1_2:
+          linguistic_term: "中"
+          confidence: 0.75
+          justification: "Average detection capabilities"
+    expert_003:
+      name: "Test Expert 3"
+      role: "operations_analyst"
+      experience_years: 18
+      assessments:
+        C1_1:
+          linguistic_term: "优"
+          confidence: 0.95
+          justification: "Outstanding surveillance performance"
+        C1_2:
+          linguistic_term: "良"
+          confidence: 0.9
+          justification: "Solid detection capabilities"
+
+incomplete_assessments:
+  description: "Incomplete assessments for edge case testing"
+  experts:
+    expert_001:
+      name: "Test Expert 1"
+      role: "analyst"
+      experience_years: 10
+      assessments:
+        C1_1:
+          linguistic_term: "良"
+          confidence: 0.8
+          justification: "Good performance"
+        # Missing other indicators
+
+invalid_assessments_wrong_terms:
+  description: "Assessments with invalid linguistic terms"
+  experts:
+    expert_001:
+      name: "Test Expert 1"
+      role: "analyst"
+      experience_years: 5
+      assessments:
+        C1_1:
+          linguistic_term: "outstanding"  # Invalid term - should be Chinese
+          confidence: 0.8
+          justification: "Invalid linguistic term for testing"
+
+boundary_case_assessments:
+  description: "Assessments testing boundary conditions"
+  experts:
+    expert_001:
+      name: "Test Expert 1"
+      role: "analyst"
+      experience_years: 8
+      assessments:
+        C1_1:
+          linguistic_term: "差"  # Poor - lowest rating
+          confidence: 0.99  # Very high confidence
+          justification: "Testing lower boundary"
+        C1_2:
+          linguistic_term: "优"  # Excellent - highest rating
+          confidence: 0.01  # Very low confidence
+          justification: "Testing upper boundary with low confidence"
+
+fuzzy_scale_definitions:
+  description: "Fuzzy scale definitions for reference"
+  scale:
+    差:  # Poor
+      value: 0.25
+      membership_function: [0.0, 0.0, 0.5, 0.0]
+    中:  # Medium
+      value: 0.50
+      membership_function: [0.0, 0.5, 1.0, 0.5]
+    良:  # Good
+      value: 0.75
+      membership_function: [0.5, 1.0, 0.5, 0.0]
+    优:  # Excellent
+      value: 1.00
+      membership_function: [1.0, 0.5, 0.0, 0.0]
