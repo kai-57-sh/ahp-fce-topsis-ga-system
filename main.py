@@ -87,7 +87,7 @@ def cmd_evaluate(args) -> None:
     # Load expert judgments
     expert_judgments = {
         'primary_capabilities_file': args.expert_judgments,
-        'secondary_indicators_dir': os.path.dirname(args.expert_judgments)
+        'secondary_indicators_dir': os.path.join(os.path.dirname(args.expert_judgments), 'secondary_indicators')
     }
 
     # Load scenario if provided

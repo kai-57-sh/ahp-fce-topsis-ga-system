@@ -227,7 +227,7 @@ def evaluate_batch(schemes: List[Dict[str, Any]],
         }
 
         # Find best scheme (rank 1)
-        best_rank_idx = np.argmin(topsis_result['rankings']) - 1
+        best_rank_idx = np.argmin(topsis_result['rankings'])
         best_scheme_id = schemes[best_rank_idx]['scheme_id']
         batch_results['best_scheme'] = {
             'scheme_id': best_scheme_id,
@@ -291,7 +291,7 @@ def _calculate_ahp_weights(indicator_config: Dict[str, Any],
         if isinstance(expert_judgments, str):
             # If it's a string, treat it as the primary capabilities file
             primary_matrix_file = expert_judgments
-            secondary_matrices_dir = os.path.dirname(expert_judgments)
+            secondary_matrices_dir = os.path.join(os.path.dirname(expert_judgments), "secondary_indicators")
         else:
             # If it's a dict, extract paths
             primary_matrix_file = expert_judgments.get('primary_capabilities_file')
@@ -301,7 +301,7 @@ def _calculate_ahp_weights(indicator_config: Dict[str, Any],
             raise ConfigurationError("Missing primary capabilities matrix file")
 
         if not secondary_matrices_dir:
-            secondary_matrices_dir = os.path.dirname(primary_matrix_file)
+            secondary_matrices_dir = os.path.join(os.path.dirname(primary_matrix_file), "secondary_indicators")
 
         # Calculate weights
         weights_result = calculate_primary_weights(primary_matrix_file, secondary_matrices_dir)

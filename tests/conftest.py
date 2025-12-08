@@ -255,6 +255,177 @@ def pytest_collection_modifyitems(config, items):
             item.add_marker(pytest.mark.validation)
 
 
+@pytest.fixture
+def real_expert_judgments():
+    """Real expert judgments using actual data files."""
+    # Use actual data files for integration testing
+    return {
+        'primary_capabilities_file': 'data/expert_judgments/primary_capabilities.yaml',
+        'secondary_indicators_dir': 'data/expert_judgments/secondary_indicators'
+    }
+
+
+@pytest.fixture
+def mock_expert_judgments():
+    """Mock expert judgments with temporary files for isolated testing."""
+    # Create temporary directory structure
+    with tempfile.TemporaryDirectory() as temp_dir:
+        # Create temporary primary matrix file
+        primary_matrix = {
+            'matrix_id': 'test_primary',
+            'expert_id': 'test_expert',
+            'comparison_scope': 'Test matrix',
+            'dimension': 3,
+            'matrix': [
+                [1.0, 2.0, 3.0],
+                [0.5, 1.0, 2.0],
+                [0.333, 0.5, 1.0]
+            ]
+        }
+
+        primary_file = os.path.join(temp_dir, 'primary_test.yaml')
+        with open(primary_file, 'w') as f:
+            yaml.dump(primary_matrix, f)
+
+        # Create temporary secondary directory and files
+        secondary_dir = os.path.join(temp_dir, 'secondary')
+        os.makedirs(secondary_dir)
+
+        # Create secondary matrices for each capability
+        for cap_id in ['C1', 'C2', 'C3']:
+            secondary_matrix = {
+                'matrix_id': f'{cap_id.lower()}_test',
+                'expert_id': 'test_expert',
+                'comparison_scope': f'{cap_id} indicators',
+                'dimension': 3,
+                'matrix': [
+                    [1.0, 1.5, 2.0],
+                    [0.667, 1.0, 1.333],
+                    [0.5, 0.75, 1.0]
+                ]
+            }
+
+            secondary_file = os.path.join(secondary_dir, f'{cap_id.lower()}_test.yaml')
+            with open(secondary_file, 'w') as f:
+                yaml.dump(secondary_matrix, f)
+
+        yield {
+            'primary_capabilities_file': primary_file,
+            'secondary_indicators_dir': secondary_dir,
+            'temp_dir': temp_dir
+        }
+
+
+@pytest.fixture
+def real_indicator_config():
+    """Real indicator configuration from actual data files."""
+    config_path = 'config/indicators.yaml'
+    if os.path.exists(config_path):
+        with open(config_path, 'r') as f:
+            return yaml.safe_load(f)
+    else:
+        # Fallback configuration if file doesn't exist
+        return {
+            'primary_capabilities': {
+                'C1': {'name': 'Situational Awareness Capability', 'weight_placeholder': 0.25},
+                'C2': {'name': 'Strike Capability', 'weight_placeholder': 0.25},
+                'C3': {'name': 'Mobility Capability', 'weight_placeholder': 0.2},
+                'C4': {'name': 'Survivability Capability', 'weight_placeholder': 0.15},
+                'C5': {'name': 'Sustainability Capability', 'weight_placeholder': 0.15}
+            },
+            'secondary_indicators': {
+                'C1_1': {'name': 'Detection Range', 'primary_capability': 'C1', 'type': 'benefit', 'fuzzy_flag': True},
+                'C1_2': {'name': 'Coverage Area', 'primary_capability': 'C1', 'type': 'benefit', 'fuzzy_flag': True},
+                'C1_3': {'name': 'Target Classification', 'primary_capability': 'C1', 'type': 'benefit', 'fuzzy_flag': True},
+                'C2_1': {'name': 'Strike Range', 'primary_capability': 'C2', 'type': 'benefit', 'fuzzy_flag': False},
+                'C2_2': {'name': 'Hit Probability', 'primary_capability': 'C2', 'type': 'benefit', 'fuzzy_flag': True},
+                'C2_3': {'name': 'Strike Accuracy', 'primary_capability': 'C2', 'type': 'benefit', 'fuzzy_flag': True},
+                'C3_1': {'name': 'Speed', 'primary_capability': 'C3', 'type': 'benefit', 'fuzzy_flag': False},
+                'C3_2': {'name': 'Maneuverability', 'primary_capability': 'C3', 'type': 'benefit', 'fuzzy_flag': True},
+                'C3_3': {'name': 'Endurance', 'primary_capability': 'C3', 'type': 'benefit', 'fuzzy_flag': True},
+                'C4_1': {'name': 'Armor Protection', 'primary_capability': 'C4', 'type': 'benefit', 'fuzzy_flag': False},
+                'C4_2': {'name': 'Stealth', 'primary_capability': 'C4', 'type': 'benefit', 'fuzzy_flag': True},
+                'C4_3': {'name': 'Electronic Warfare', 'primary_capability': 'C4', 'type': 'benefit', 'fuzzy_flag': True},
+                'C5_1': {'name': 'Fuel Efficiency', 'primary_capability': 'C5', 'type': 'benefit', 'fuzzy_flag': False},
+                'C5_2': {'name': 'Maintenance', 'primary_capability': 'C5', 'type': 'benefit', 'fuzzy_flag': True},
+                'C5_3': {'name': 'Logistics', 'primary_capability': 'C5', 'type': 'benefit', 'fuzzy_flag': True}
+            }
+        }
+
+
+@pytest.fixture
+def real_fuzzy_config():
+    """Real fuzzy configuration from actual data files."""
+    config_path = 'config/fuzzy_sets.yaml'
+    if os.path.exists(config_path):
+        with open(config_path, 'r') as f:
+            return yaml.safe_load(f)
+    else:
+        # Fallback configuration if file doesn't exist
+        return {
+            'linguistic_scale': {
+                '差': {'value': 0.25, 'description': 'Poor'},
+                '中': {'value': 0.50, 'description': 'Medium'},
+                '良': {'value': 0.75, 'description': 'Good'},
+                '优': {'value': 1.00, 'description': 'Excellent'}
+            },
+            'applicable_indicators': [
+                'C1_1', 'C1_2', 'C1_3', 'C2_1', 'C2_2', 'C2_3',
+                'C3_1', 'C3_2', 'C3_3', 'C4_1', 'C4_2', 'C4_3',
+                'C5_1', 'C5_2', 'C5_3'
+            ]
+        }
+
+
+@pytest.fixture
+def working_configurations():
+    """Provide working configurations for integration tests."""
+    from tests.utils.test_data_loader import test_data_manager
+
+    return {
+        'expert_judgments': test_data_manager.load_real_expert_judgments(),
+        'indicator_config': test_data_manager.load_real_indicator_config(),
+        'fuzzy_config': test_data_manager.load_real_fuzzy_config(),
+        'available_schemes': test_data_manager.load_available_schemes()
+    }
+
+
+@pytest.fixture
+def sample_schemes():
+    """Provide sample schemes for testing."""
+    from tests.utils.test_data_loader import test_data_manager
+    schemes = test_data_manager.load_available_schemes()
+
+    # Return first few schemes for testing
+    return {
+        'baseline_scheme': next((s for s in schemes if s.get('scheme_id') == 'baseline_scheme'), None),
+        'balanced_force': next((s for s in schemes if s.get('scheme_id') == 'balanced_force'), None),
+        'high_endurance_force': next((s for s in schemes if s.get('scheme_id') == 'high_endurance_force'), None),
+        'tech_lite_force': next((s for s in schemes if s.get('scheme_id') == 'tech_lite_force'), None)
+    }
+
+
+@pytest.fixture
+def real_expert_judgments():
+    """Real expert judgments using actual data files."""
+    from tests.utils.test_data_loader import test_data_manager
+    return test_data_manager.load_real_expert_judgments()
+
+
+@pytest.fixture
+def real_indicator_config():
+    """Real indicator configuration."""
+    from tests.utils.test_data_loader import test_data_manager
+    return test_data_manager.load_real_indicator_config()
+
+
+@pytest.fixture
+def real_fuzzy_config():
+    """Real fuzzy configuration."""
+    from tests.utils.test_data_loader import test_data_manager
+    return test_data_manager.load_real_fuzzy_config()
+
+
 # Suppress specific warnings for cleaner test output
 @pytest.fixture(autouse=True)
 def suppress_warnings():

@@ -18,7 +18,10 @@ def main():
         indicator_config = yaml.safe_load(open('config/indicators.yaml'))
         fuzzy_config = yaml.safe_load(open('config/fuzzy_sets.yaml'))
         scheme_data = yaml.safe_load(open('data/schemes/baseline_scheme.yaml'))
-        expert_judgments = 'data/expert_judgments/primary_capabilities.yaml'
+        expert_judgments = {
+            'primary_capabilities_file': 'data/expert_judgments/primary_capabilities.yaml',
+            'secondary_indicators_dir': 'data/expert_judgments/secondary_indicators'
+        }
         print("✓ Configurations loaded successfully")
     except Exception as e:
         print(f"✗ Failed to load configurations: {e}")
@@ -28,8 +31,8 @@ def main():
     print("\n2. Testing AHP weights calculation...")
     try:
         weights_result = calculate_primary_weights(
-            expert_judgments,
-            'data/expert_judgments'
+            expert_judgments['primary_capabilities_file'],
+            expert_judgments['secondary_indicators_dir']
         )
         print(f"✓ AHP weights calculated successfully")
         print(f"  Number of global weights: {len(weights_result['global_weights'])}")

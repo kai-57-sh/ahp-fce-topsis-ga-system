@@ -128,15 +128,20 @@ class TestEvaluationPipeline:
 
     @pytest.fixture
     def expert_judgments(self):
-        """Sample expert judgments for AHP."""
+        """Sample expert judgments for AHP using real data files."""
+        # Use real expert judgments to avoid file not found errors
         return {
-            'primary_capabilities_file': 'dummy_path',
-            'secondary_indicators_dir': 'dummy_dir'
+            'primary_capabilities_file': 'data/expert_judgments/primary_capabilities.yaml',
+            'secondary_indicators_dir': 'data/expert_judgments/secondary_indicators'
         }
 
-    def test_evaluate_single_scheme_end_to_end(self, sample_configurations, indicator_config, fuzzy_config, expert_judgments):
+    def test_evaluate_single_scheme_end_to_end(self, working_configurations):
         """Test complete single scheme evaluation workflow."""
-        scheme = sample_configurations['baseline_scheme']
+        # Use working configurations from our test data loader
+        scheme = working_configurations['available_schemes'][0]  # Use first available scheme
+        indicator_config = working_configurations['indicator_config']
+        fuzzy_config = working_configurations['fuzzy_config']
+        expert_judgments = working_configurations['expert_judgments']
 
         # Record start time for performance testing
         start_time = time.time()
@@ -176,17 +181,17 @@ class TestEvaluationPipeline:
 
         # Check transformation stages
         transformation_stages = [t['stage'] for t in audit_trail['transformations']]
-        expected_stages = ['AHP', 'FCE', 'TOPSIS']
+        expected_stages = ['AHP Weight Calculation', 'Fuzzy Evaluation', 'TOPSIS Ranking']
         for stage in expected_stages:
-            assert stage in transformation_stages, f"Missing {stage} transformation in audit trail"
+            assert any(stage in ts for ts in transformation_stages), f"Missing {stage} transformation in audit trail. Found: {transformation_stages}"
 
-    def test_evaluate_batch_ranking_consistency(self, sample_configurations, indicator_config, fuzzy_config, expert_judgments):
+    def test_evaluate_batch_ranking_consistency(self, working_configurations):
         """Test batch evaluation and ranking consistency."""
-        schemes = [
-            sample_configurations['baseline_scheme'],
-            sample_configurations['high_capability_scheme'],
-            sample_configurations['minimal_scheme']
-        ]
+        # Use working configurations from our test data loader
+        schemes = working_configurations['available_schemes'][:3]  # Use first 3 available schemes
+        indicator_config = working_configurations['indicator_config']
+        fuzzy_config = working_configurations['fuzzy_config']
+        expert_judgments = working_configurations['expert_judgments']
 
         # Evaluate batch
         batch_result = evaluate_batch(

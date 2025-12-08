@@ -280,7 +280,7 @@ def calculate_primary_weights(primary_matrix_file: str,
         global_weights = {}
 
         for cap_idx, cap in enumerate(primary_capabilities):
-            secondary_file = f"{secondary_matrices_dir}/secondary_indicators/c{cap_idx + 1}_indicators.yaml"
+            secondary_file = f"{secondary_matrices_dir}/c{cap_idx + 1}_indicators.yaml"
 
             try:
                 secondary_data = load_judgment_matrix(secondary_file)
